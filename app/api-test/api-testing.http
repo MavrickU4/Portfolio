@@ -1,0 +1,97 @@
+POST http://localhost:3000/api/auth/register HTTP/1.1
+content-type: application/json
+
+{
+    "displayName" : "David Cultard",
+    "password": "123456",
+    "username" : "dcultard",
+    "emailAddress": "dcultard@f1.com"
+}
+
+###
+POST http://localhost:3000/api/auth/login HTTP/1.1
+content-type: application/json
+
+{   
+    "password": "123456",
+    "username" : "dcultard"
+}
+
+###
+GET http://localhost:3000/api/auth/logout HTTP/1.1
+content-type: application/json
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+###
+GET http://localhost:3000/api/movies/list HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNGY0MzFkZDZkOWJjNWNhMWYyOGFlYyIsImRpc3BsYXlOYW1lIjoiRGF2aWQgQ3VsdGFyZCIsInVzZXJuYW1lIjoiZGN1bHRhcmQiLCJpYXQiOjE2NjYxMzkyNDIsImV4cCI6MTY2Njc0NDA0Mn0.upIR735uvAxolzembb5fQnNf3noPDCZtThowf21pboo
+
+###
+GET http://localhost:3000/api/movies/633b87b12c6618a6682a7e60 HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNGY0MzFkZDZkOWJjNWNhMWYyOGFlYyIsImRpc3BsYXlOYW1lIjoiRGF2aWQgQ3VsdGFyZCIsInVzZXJuYW1lIjoiZGN1bHRhcmQiLCJpYXQiOjE2NjYxMzkyNDIsImV4cCI6MTY2Njc0NDA0Mn0.upIR735uvAxolzembb5fQnNf3noPDCZtThowf21pboo
+
+###
+POST http://localhost:3000/api/movies/add HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNGY0MzFkZDZkOWJjNWNhMWYyOGFlYyIsImRpc3BsYXlOYW1lIjoiRGF2aWQgQ3VsdGFyZCIsInVzZXJuYW1lIjoiZGN1bHRhcmQiLCJpYXQiOjE2NjYxMzkyNDIsImV4cCI6MTY2Njc0NDA0Mn0.upIR735uvAxolzembb5fQnNf3noPDCZtThowf21pboo
+
+{
+    "name": "Neverending Story 2", 
+    "year": "1976", 
+    "name": "Neverending Story 3", 
+    "year": "1978", 
+    "director": "Michael Bane",
+    "genre": "Fantasy",
+    "runtime": 120
+}
+
+###
+PUT http://localhost:3000/api/movies/edit/634f30ac368dde3a9cf2fb74 HTTP/1.1
+PUT http://localhost:3000/api/movies/edit/634f36a09940103c1c4808fc HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNGY0MzFkZDZkOWJjNWNhMWYyOGFlYyIsImRpc3BsYXlOYW1lIjoiRGF2aWQgQ3VsdGFyZCIsInVzZXJuYW1lIjoiZGN1bHRhcmQiLCJpYXQiOjE2NjYxMzkyNDIsImV4cCI6MTY2Njc0NDA0Mn0.upIR735uvAxolzembb5fQnNf3noPDCZtThowf21pboo
+
+{
+    "name": "Neverending Story 2", 
+    "year": "1977", 
+    "name": "Neverending Story 3", 
+    "year": "1979", 
+    "director": "Michael Bane",
+    "genre": "Fantasy",
+    "runtime": 120
+    "runtime": 126
+}
+
+###
+DELETE http://localhost:3000/api/movies/delete/634f30cee2d09b46dd125712 HTTP/1.1
+DELETE http://localhost:3000/api/movies/delete/634f36a09940103c1c4808fc HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNGY0MzFkZDZkOWJjNWNhMWYyOGFlYyIsImRpc3BsYXlOYW1lIjoiRGF2aWQgQ3VsdGFyZCIsInVzZXJuYW1lIjoiZGN1bHRhcmQiLCJpYXQiOjE2NjYxMzkyNDIsImV4cCI6MTY2Njc0NDA0Mn0.upIR735uvAxolzembb5fQnNf3noPDCZtThowf21pboo
+

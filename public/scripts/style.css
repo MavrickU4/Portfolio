@@ -1,0 +1,327 @@
+@charset "UTF-8";
+/* CSS Document */
+
+h1{
+	margin:20px;
+	text-align: center;
+}
+h2{
+	margin:20px;
+	text-align: center;
+}
+h3{
+	margin:20px;
+	text-align: center;
+}
+h4{
+	margin:20px;
+	text-align: center;
+}
+h5{
+	margin:20px;
+	text-align: left;
+	font-size:18px;
+}
+h7{
+	font-size: 20px;
+	margin-top:5px;
+}
+li{
+	text-align: left;
+  margin: 15px 0;
+}
+body   
+{ 
+	text-align: center;
+background-image: url("./content/images/1.jpeg");
+background-attachment: fixed;
+height:500px;  
+background-size: cover;  
+	overflow:auto;
+}  
+header2 {  
+background-color:#2B2929;  
+position: fixed;  
+left: 0;  
+right: 0;  
+top: 5px;  
+height: 50px;  
+display: flex;  
+align-items: center;  
+box-shadow: 0 0 25px 0 black; 
+	z-index:999;
+}  
+header * {  
+display:flex;  
+}  
+header li {  
+margin: 20px;  
+}  
+header li a {  
+color: white;  
+text-decoration: none;  
+}  
+footer {  
+background-color:#2B2929; 
+position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+height: 50px;   
+align-items: center;  
+box-shadow: 0 0 25px 0 black; 
+	z-index:999;
+}   
+ 
+.logo {
+background-image: url("./content/images/logo.png");
+height: 40px;  
+width: 40px;
+background-size: cover;  
+margin-top:9px;
+	margin-right:20px;
+	margin-left:-20px;
+}
+
+.container {
+	position: relative;
+	margin: auto;
+	min-width: 630px;
+	height: 100%;
+ 	width: 80%;
+	border:solid;
+	border-radius: 20px;
+	text-align: center;
+	overflow:hidden;
+	display: inline-block;
+	margin-top:20px;
+}
+.container:before {
+    content: '';
+    position:absolute;
+
+}
+.container:before {
+    box-shadow: inset 0 0 1000px rgba(255, 255, 255, 0.5);
+}
+.container:before {
+    box-shadow: inset 0 0 1000px rgba(255, 255, 255, .5);
+    filter: blur(8px);
+}
+.container {
+	  	backdrop-filter: blur(9px);
+}
+ 
+.container:before {
+    background: inherit;
+}
+
+.contMission{
+	margin-left:0px;
+	margin-bottom:20px;
+	font-size: auto;
+	text-align: center;
+	display:inline-block;
+	vertical-align: middle;
+	width: 87%;
+	height:82%;
+	border:solid;
+	border-radius: 10px;
+	overflow: auto;
+}
+
+.btnMe{
+	font-weight: 300;
+	font-size: 18px;
+	margin-top:30px;
+	float:inherit;
+	width:200px;
+	height:50px;
+	border-radius: 15px;
+	background-color:black;
+	color:white;
+}
+.btnMe:hover{
+	background-color: cornflowerblue;
+}
+
+.containerAbout {
+	position: relative;
+	min-width: 630px;
+	height: 90%;
+ 	width: 80%;
+	border:solid;
+	border-radius: 20px;
+	text-align: center;
+	overflow:hidden;
+	display: inline-block;
+	margin-bottom: 5px;
+	margin-top:20px;
+}
+.containerAbout:before {
+    content: '';
+    float:left;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.containerAbout:before {
+    box-shadow: inset 0 0 1000px rgba(255, 255, 255, 0.5);
+}
+.containerAbout:before {
+    box-shadow: inset 0 0 1000px rgba(255, 255, 255, .5);
+    backdrop-filter: blur(8px);
+}
+.containerAbout {
+  	backdrop-filter: blur(9px);
+	 
+	  background-size:cover; 
+}
+ 
+.containerAbout:before {
+    background: inherit;
+}
+.contAboutPic{
+	display:inline-block;
+	vertical-align: middle;
+	margin-left:1px;
+	width: 47%;
+	height:72%;
+	border:solid;
+	border-radius: 10px;
+	overflow:auto;
+}
+.contAbout{
+	display:inline-block;
+	vertical-align: middle;
+	margin-left:1px;
+	width: 47%;
+	height:72%;
+	border:solid;
+	border-radius: 10px;
+background-size:cover; 
+	overflow:auto;
+}
+.divAboutBreak{
+	height:70px;
+}
+.contAboutBottom{
+	display:inline-block;
+	vertical-align:baseline;
+	margin-top:4px;
+	min-width: 630px;
+	width: 80%;
+	height:200px;
+	border:solid;
+	border-radius: 10px;
+	overflow:hidden;
+	backdrop-filter: blur(9px);
+}
+.conProject{
+    position: relative;
+	min-width: 380px;
+	height: 95%;
+ 	width: 47%;
+	border:solid;
+	border-radius: 20px;
+	text-align: center;
+	overflow:hidden;
+	display: inline-block;
+	margin-bottom: 5px;
+	backdrop-filter: blur(9px);
+	background-size:cover;
+}
+.ImgProject{
+    width: 100%; /* or any custom size */
+    height: 100%; 
+	object-fit: contain;
+}
+.ImgAbout{
+    width: 100%; /* or any custom size */
+    height: 100%; 
+	object-fit: co;
+}
+
+contactForm{
+	width:100%;
+	height:100%;
+	max-width: 600px;
+	min-width: 400px;
+   text-align: center;
+   margin: 20px auto;
+   backdrop-filter: blur(9px);
+}
+.inputName{
+	margin-right: 20px;
+	width:43%;
+	margin-top:40px;
+	float:left;
+	margin-left:20px;
+	border-radius: 5px;
+	height:30px;
+	border-width: 2px;
+	border-color:black;
+	padding:5px;
+}
+.inputEmail{
+	margin-right: 20px;
+	width:43%;
+	margin-top:20px;
+	float:left;
+	margin-left:20px;
+	border-radius: 5px;
+	height:30px;
+	border-width: 2px;
+	border-color:black;
+	padding:5px;
+}
+.inputSubject{
+	margin-right: 20px;
+	width:43%;
+	margin-top:20px;
+	float:left;
+	margin-left:20px;
+	border-radius: 5px;
+	height:30px;
+	border-width: 2px;
+	border-color:black;
+	padding:5px;
+}
+.inputMessage{
+	width:43%;
+	height:100px;
+	margin-top:40px;
+	float:right;
+	margin-right:20px;
+	border-radius: 5px;
+	border-width: 2px;
+	border-color:black;
+	padding:5px;
+}
+.inputSubmit{
+	width:43%;
+	height:44px;
+	margin-top:14px;
+	float:right;
+	margin-right:20px;
+	border-radius: 10px;
+	border-width: 2px;
+	border-color:black;
+	padding:5px;
+	font-weight: 300;
+	font-size: 18px;
+	background-color:black;
+	color:white;
+}
+.inputSubmit:hover{
+	background-color: cornflowerblue;
+}
+.ContactInfo{
+	width:94%;
+	margin-top:250px;
+	float:bottom;
+	text-align:center;
+	padding:20px;
+	height:50px;
+}
