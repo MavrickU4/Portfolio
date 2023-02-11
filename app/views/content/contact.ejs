@@ -1,12 +1,30 @@
 
     <!--<h1><%= title %></h1>-->
     <div class="container">
-        <h1>Contact Me</h1>
-    <form class="ContactForm">
-        <input type="text" id="inputName" class="inputName" placeholder="Name">
-         <textarea name="message" type="text" class="inputMessage" placeholder="Message"></textarea> 
-        <input type="email" class="inputEmail" placeholder="Email address">
-        <input type="text" class="inputSubject" placeholder="Subject">
-        <input type="submit" value="Submit" class="inputSubmit" onclick="formSubmit()">
-    </form>
-                <div class="ContactInfo"><h3>E-mail: tupton@my.centennialcollege.ca</h3></div>
+
+        <div style="display: flex; justify-content: center; padding-top: 40px;">
+            <div style="width: 500px; background-color: white; padding: 20px; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); border-radius: 5px;">
+              <h3 style="text-align: center;">Contact Me</h3>
+              <form>
+                <div style="display: flex; flex-direction: column;">
+                  <label>Name:</label>
+                  <input type="text" name="name" required>
+                  
+                  <label>Email:</label>
+                  <input type="email" name="email" required>
+                  
+                  <label>Subject:</label>
+                  <input type="text" name="subject" required>
+                  
+                  <label>Message:</label>
+                  <textarea name="message" rows="5" required></textarea>
+                  
+                  <button style="margin-top: 10px; padding: 10px; background-color: lightblue; border-radius: 5px; border: none; color: white; cursor: pointer;" type="submit">Submit</button>
+                </div>
+              </form>
+              <br>
+            <h5> Or E-mail: tupton@my.centennialcollege.ca</h5>
+            </div>
+
+          </div>
+          
