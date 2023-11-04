@@ -8,7 +8,7 @@
 //document.getElementById("Services").onclick = function () {location.href = "services.html";}
 //document.getElementById("Contact").onclick = function () {location.href = "contact.html";}
 
-document.getElementById("aboutImg").src = "./content/images/Tim.jpg";;
+//document.getElementById("aboutImg").src = "./content/images/Tim.jpg";;
 
 function cover(x){	
 	document.getElementById("ImgProject").src = "./content/images/cover1.png";
