@@ -52,12 +52,12 @@ import adsApiRouter from './routes/api/ad-api.router.server.js';
 const app = express();
 
 // Complete the DB Configuration
-mongoose.connect(MongoURI);
-const db = mongoose.connection;
+// mongoose.connect(MongoURI);
+// const db = mongoose.connection;
 
 //Listen for connection success or error
-db.on('open', () => console.log("Connected to MongoDB"));
-db.on('error', () => console.log("Mongo Connection Error"));
+// db.on('open', () => console.log("Connected to MongoDB"));
+// db.on('error', () => console.log("Mongo Connection Error"));
 
 // Set Up Middlewares
 

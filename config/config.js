@@ -1,3 +1,2 @@
-
 export const Secret = "MySecret";
-export const MongoURI = "mongodb+srv://PersonalProfileDB:Xp6BWhch8mxjGrC7@firstcluster.lmcwlwp.mongodb.net/?retryWrites=true&w=majority";
+export const MongoURI = "mongodb+srv://timupton4:YXXr2iNiS3z7fnRV@clustergroup.eqe4bye.mongodb.net/?retryWrites=true&w=majority";
