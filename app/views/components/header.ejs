@@ -1,17 +1,4 @@
-<!--
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
--->
+
 <header class="bg-white shadow">
   <div class="mx-auto max-w-7xl px-2 sm:px-4 lg:divide-y lg:divide-gray-200 lg:px-8">
     <div class="relative flex h-16 justify-between">
@@ -99,11 +86,11 @@
     </div>
     <nav class="hidden lg:flex lg:space-x-8 lg:py-2" aria-label="Global">
       <!-- Current: "bg-gray-100 text-gray-900", Default: "text-gray-900 hover:bg-gray-50 hover:text-gray-900" -->
-      <a href="/" class="bg-[#F5B840] text-gray-900 inline-flex items-center rounded-md py-2 px-3 text-sm font-medium" aria-current="page">Dashboard</a>
-      <a href="/about" class="text-gray-900 hover:bg-gray-50 hover:text-gray-900 inline-flex items-center rounded-md py-2 px-3 text-sm font-medium">About</a>
-      <a href="/projects" class="text-gray-900 hover:bg-gray-50 hover:text-gray-900 inline-flex items-center rounded-md py-2 px-3 text-sm font-medium">Projects</a>
-      <a href="/services" class="text-gray-900 hover:bg-gray-50 hover:text-gray-900 inline-flex items-center rounded-md py-2 px-3 text-sm font-medium">Services</a>
-      <a href="/contact" class="text-gray-900 hover:bg-gray-50 hover:text-gray-900 inline-flex items-center rounded-md py-2 px-3 text-sm font-medium">Contact</a>
+      <a href="/" class="<%= page === 'home' ? 'bg-[#F5B840] text-gray-900 hover:bg-[#edc376] hover:text-gray-900' : 'text-gray-900 hover:bg-gray-50 hover:text-gray-900' %>  inline-flex items-center rounded-md py-2 px-3 text-sm font-medium" aria-current="page">Dashboard</a>
+      <a href="/about" class="<%= page === 'about' ? 'bg-[#F5B840] text-gray-900 hover:bg-[#edc376] hover:text-gray-900' : 'text-gray-900 hover:bg-gray-50 hover:text-gray-900' %> inline-flex items-center rounded-md py-2 px-3 text-sm font-medium">About</a>
+       <a href="/projects" class="<%= page === 'projects' ? 'bg-[#F5B840] text-gray-900 hover:bg-[#edc376] hover:text-gray-900' : 'text-gray-900 hover:bg-gray-50 hover:text-gray-900' %>  inline-flex items-center rounded-md py-2 px-3 text-sm font-medium">Projects</a>
+      <a href="/services" class="<%= page === 'services' ? 'bg-[#F5B840] text-gray-900 hover:bg-[#edc376] hover:text-gray-900' : 'text-gray-900 hover:bg-gray-50 hover:text-gray-900' %>  inline-flex items-center rounded-md py-2 px-3 text-sm font-medium">Services</a>
+      <a href="/contact" class="<%= page === 'contact' ? 'bg-[#F5B840] text-gray-900 hover:bg-[#edc376] hover:text-gray-900' : 'text-gray-900 hover:bg-gray-50 hover:text-gray-900' %>  inline-flex items-center rounded-md py-2 px-3 text-sm font-medium">Contact</a>
     </nav>
   </div>
 
@@ -111,11 +98,11 @@
   <nav class="lg:hidden" aria-label="Global" id="mobile-menu">
     <div class="space-y-1 px-2 pb-3 pt-2">
       <!-- Current: "bg-gray-100 text-gray-900", Default: "text-gray-900 hover:bg-gray-50 hover:text-gray-900" -->
-      <a href="/" class="bg-gray-100 text-gray-900 block rounded-md py-2 px-3 text-base font-medium" aria-current="page">Dashboard</a>
-      <a href="/about" class="text-gray-900 hover:bg-gray-50 hover:text-gray-900 block rounded-md py-2 px-3 text-base font-medium">About</a>
-      <a href="/projects" class="text-gray-900 hover:bg-gray-50 hover:text-gray-900 block rounded-md py-2 px-3 text-base font-medium">Projects</a>
-      <a href="/services" class="text-gray-900 hover:bg-gray-50 hover:text-gray-900 block rounded-md py-2 px-3 text-base font-medium">Services</a>
-      <a href="/contact" class="text-gray-900 hover:bg-gray-50 hover:text-gray-900 block rounded-md py-2 px-3 text-base font-medium">Contact</a>
+      <a href="/" class="<%= page === 'home' ? 'bg-[#F5B840] text-gray-900 hover:bg-[#edc376] hover:text-gray-900' : 'text-gray-900 hover:bg-gray-50 hover:text-gray-900' %>  block rounded-md py-2 px-3 text-base font-medium" aria-current="page">Dashboard</a>
+      <a href="/about" class="<%= page === 'about' ? 'bg-[#F5B840] text-gray-900 hover:bg-[#edc376] hover:text-gray-900' : 'text-gray-900 hover:bg-gray-50 hover:text-gray-900' %>  block rounded-md py-2 px-3 text-base font-medium">About</a>
+      <a href="/projects" class="<%= page === 'projects' ? 'bg-[#F5B840] text-gray-900 hover:bg-[#edc376] hover:text-gray-900' : 'text-gray-900 hover:bg-gray-50 hover:text-gray-900' %>  block rounded-md py-2 px-3 text-base font-medium">Projects</a>
+      <a href="/services" class="<%= page === 'services' ? 'bg-[#F5B840] text-gray-900 hover:bg-[#edc376] hover:text-gray-900' : 'text-gray-900 hover:bg-gray-50 hover:text-gray-900' %>  block rounded-md py-2 px-3 text-base font-medium">Services</a>
+      <a href="/contact" class="<%= page === 'contact' ? 'bg-[#F5B840] text-gray-900 hover:bg-[#edc376] hover:text-gray-900' : 'text-gray-900 hover:bg-gray-50 hover:text-gray-900' %>  block rounded-md py-2 px-3 text-base font-medium">Contact</a>
     </div>
     <div class="border-t border-gray-200 pb-3 pt-4">
       <div class="flex items-center px-4">

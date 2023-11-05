@@ -1,2 +1,2 @@
-// export const Secret =
-// export const Mongo URI 
+export const Secret = "MySecret";
+export const MongoURI = '';
