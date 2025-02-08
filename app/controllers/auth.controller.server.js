@@ -1,24 +1,20 @@
-/*
-File:
-*/
-
 import express from 'express';
-
-// need passport 
 import passport from 'passport';
-
-// need to include the User Model for authentication
 import User from '../models/user.js';
-
-// import DisplayName Utility method
-import { UserDisplayName } from '../utils/index.js';
+import { mobileCheck, UserDisplayName } from '../utils/index.js';
 
 // Display Functions
-export function DisplayLoginPage(req, res, next){
+export function displayLoginPage(req, res, next){
+    const admin = req.query.admin;
     if(!req.user){
-        return res.render('index', {title: 'Login', page: 'login', messages: req.flash('loginMessage'), displayName: UserDisplayName(req) });
+        return res.render('index', {title: 'Login', page: admin === 'true' ? '/admin/admin-login' : 'login', 
+            successMessage: req.flash('successMessage'),  errorMessage: req.flash('errorMessage'), 
+            displayName: UserDisplayName(req), mobile: mobileCheck(req) });
     }
 
+    if (admin === 'true') {
+        return res.redirect('/admin/dashboard');
+    }
     return res.redirect('/ad-list');
 }
 

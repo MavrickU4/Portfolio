@@ -3,13 +3,13 @@ import jwt from 'jsonwebtoken';
 import { Secret } from '../../config/config.js';
 import nodemailer from 'nodemailer';
 
-export const companyEmail = 'helpinghand.user@gmail.com';
+export const companyEmail = 'tim.upton4@gmail.com';
 export const personalEmail = 'tim.upton4@gmail.com';
 
 export const transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
-      user: 'helpinghand.user@gmail.com',
+      user: 'tim.upton4@gmail.com',
       pass: 'gmvozmrcvbsbgarp'
     }
 });

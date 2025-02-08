@@ -57,17 +57,3 @@ function onListening()
   let bind = 'pipe ' + addr;
   debug('Listening on ' + bind);
 }
-
-
-// //UPLOADING AN IMAGE TO MONGODB SERVER
-// //const express = require('express');
-// const multer = require('multer');
-// const appE = express();
-// const upload = multer({ dest: 'uploads/' });
-
-// appE.post('/upload', upload.single('photo'), (req, res) => {
-//   // The uploaded file is available as req.file
-//   console.log(req.file);
-
-//   // You can now proceed to save the file to your database, using MongoDB or any other database system.
-// });

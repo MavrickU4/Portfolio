@@ -1,6 +1,4 @@
-/*
-File: 
-*/
+
 import { Router } from "express";
 import { displayAboutPage,
     displayHomePage,
@@ -22,5 +20,6 @@ router.get('/education', displayEducationPage);
 router.get('/contact', displayContactPage);
 
 router.post('/send-message', processSendMessage);
+
 
 export default router;
