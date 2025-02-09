@@ -8,27 +8,27 @@ import fs from 'fs';
 import dotenv from 'dotenv';dotenv.config();
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const CREDENTIALS_PATH = path.join(__dirname, '../utils/gmail-credentials.json');
+// const CREDENTIALS_PATH = path.join(__dirname, '../utils/gmail-credentials.json');
 
 try {
   // Read file synchronously and parse JSON
-  const credentialsData = fs.readFileSync(CREDENTIALS_PATH, 'utf-8');
+  // const credentialsData = fs.readFileSync(CREDENTIALS_PATH, 'utf-8');
   // console.log('Credentials data:', credentialsData); // Debug output
 
-  const credentials = JSON.parse(credentialsData);
+  // const credentials = JSON.parse(credentialsData);
   // console.log('Credentials:', credentials);
 } catch (error) {
   console.error('Error reading or parsing credentials file:', error);
 }
 
-const credentials = JSON.parse(fs.readFileSync(CREDENTIALS_PATH, 'utf-8'));
+// const credentials = JSON.parse(fs.readFileSync(CREDENTIALS_PATH, 'utf-8'));
 
 // Load refresh token from tokens file
 // const tokens = JSON.parse(fs.readFileSync(TOKENS_PATH, 'utf-8'));
 
 // Configure OAuth2 client
-const { client_secret, client_id, redirect_uris } = credentials.installed || credentials.web;
-const oauth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris[0]);
+// const { client_secret, client_id, redirect_uris } = credentials.installed || credentials.web;
+const oauth2Client = new google.auth.OAuth2(process.env.GOOGLE_CLIENT_ID, process.env.GOOGLE_CLIENT_SECRET, process.env.GOOGLE_REDIRECT_URI);
 
 // Set the refresh token
 const REFRESH_TOKEN = process.env.GOOGLE_REFRESH_TOKEN; 
