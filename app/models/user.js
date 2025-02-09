@@ -13,7 +13,8 @@ const UserSchema = new Schema({
     emailAddress: String,
     firstName: String,
     lastName: String,
-    userType: String
+    userType: String,
+    admin: { type: Boolean, default: false }, 
 },{
     timestamps:true,
     collection: 'users'

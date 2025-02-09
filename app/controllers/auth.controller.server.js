@@ -20,37 +20,53 @@ export function displayLoginPage(req, res, next){
 
 export function DisplayRegisterPage(req, res, next){
     if(!req.user){
-        return res.render('index', {title: 'Register', page: 'register', messages: req.flash('registerMessage'), displayName: UserDisplayName(req)});
+        return res.render('index', {title: 'Register', page: 'register', 
+            successMessage: req.flash('successMessage'),  errorMessage: req.flash('errorMessage'), 
+            messages: req.flash('registerMessage'), displayName: UserDisplayName(req),
+            mobile: mobileCheck(req),
+        });
     }
 
     return res.redirect('/ad-list');
 }
 
-// Processing Function
+// Processing Functions
 export function processLoginPage(req, res, next) {
+    const { username, password } = req.body; // Extract username & password
     const admin = req.query.admin;
+    console.log(`Login attempt: ${username}, Admin: ${password}`);
+    if (!username || !password) {
+        return res.status(400).json({ message: 'Username and password are required' });
+    }
+
+    console.log(`Login attempt: ${username}, Admin: ${admin}`);
 
     passport.authenticate('local', function (err, user, info) {
         if (err) {
-            console.error(err);
+            console.error('Authentication error:', err);
             return res.status(500).json({ message: `Server error: ${err.message}` });
         }
 
         if (!user) {
-            return res.status(401).json({ message: 'Authentication Error' });
+            return res.status(401).json({ message: info?.message || 'Authentication failed' });
         }
 
         req.logIn(user, function (err) {
             if (err) {
-                console.error(err);
+                console.error('Login error:', err);
                 return res.status(500).json({ message: `Login error: ${err.message}` });
             }
 
-            return res.status(200).json({ message: 'Success', admin: admin === 'true' });
+            return res.status(200).json({ 
+                message: 'Success', 
+                admin: admin === 'true' 
+            });
         });
 
     })(req, res, next);
 }
+
+
 
 
 export function processRegisterPage(req, res, next){
@@ -83,7 +99,7 @@ export function processRegisterPage(req, res, next){
         return passport.authenticate('local')(req, res, function()
         {
             if (req.query.admin === 'true') {
-                return res.redirect('/admin/dashboard');
+                return res.redirect('/admin/dashboard/index.html');
             } else {
                 return res.redirect('/');
             }

@@ -11,7 +11,7 @@
           <div>
             <label for="email" class="block <% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %>/6 font-medium text-gray-900">Email address</label>
             <div class="mt-2">
-              <input id="username-password" type="email" name="email" id="email" autocomplete="email" required class="block w-full border rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:<% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %>/6">
+              <input id="username-input" type="email" name="email" id="email" autocomplete="email" required class="block w-full border rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:<% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %>/6">
             </div>
           </div>
   
@@ -42,7 +42,7 @@
           </div>
   
           <div>
-            <label type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 <% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %>/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
+            <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 <% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %>/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
           </div>
         </form>
   
@@ -98,11 +98,6 @@
         <div class="alert alert-success" id="emailSentFlash" style="display: none;">
         </div>
     </div>
-    <% if (error && error != "") { %>
-      <div class="alert alert-danger" role="alert">
-        <%= error %>
-      </div>
-    <% } %>
     <button type="submit" class="btn btn-primary mr-2">Submit</button>
     <button type="button" class="btn btn-danger" id="cancelForgotPsw">Cancel</button>
   </form>
@@ -148,10 +143,10 @@ function sendPasswordResetEmail(email) {
 const loginDiv = document.getElementById("loginDiv");
 const forgotPasswordDiv = document.getElementById("forgotPasswordDiv");
 // const forgotPasswordDivMobile = document.getElementById("forgotPasswordDivMobile");
-document.getElementById('forgotPswLabel').addEventListener('click', function(){
-  forgotPasswordDiv.style.display = "block";
-  loginDiv.style.display = "none";
-})
+// document.getElementById('forgotPswLabel').addEventListener('click', function(){
+//   forgotPasswordDiv.style.display = "block";
+//   loginDiv.style.display = "none";
+// })
 // document.getElementById('forgotPswLabel-mobile').addEventListener('click', function(){
 //   forgotPasswordDivMobile.style.display = "block";
 //   loginDivMobile.style.display = "none";
@@ -161,39 +156,48 @@ document.getElementById('cancelForgotPsw').addEventListener('click', function(){
   forgotPasswordDiv.style.display = "none";
   loginDiv.style.display = "block";
 })
-// document.getElementById('cancelForgotPswMobile').addEventListener('click', function(){
-//   forgotPasswordDivMobile.style.display = "none";
-//   loginDivMobile.style.display = "block";
-// })
 
-document.getElementById('login-form').addEventListener('submit', () => {
-  event.preventDefault();
-  ajaxPostLogin('/login?admin=true', document.getElementById('username-input').value, document.getElementById('password-value').value);
+document.getElementById('login-form').addEventListener('submit', (event) => {
+  event.preventDefault();  
+
+  // Get values from input fields
+  const username = document.getElementById('username-input').value;
+  const password = document.getElementById('password-input').value;  // Fixed ID
+  console.log(username);
+  // Call AJAX function
+  ajaxPostLogin('/login?admin=true', username, password);
 });
 
 const spinner = document.getElementById('loading-div');
 
 function ajaxPostLogin(url, username, password) {
-    spinner.classList.remove('hidden');
+    spinner.classList.remove('hidden'); // Ensure spinner is defined somewhere
     const xhr = new XMLHttpRequest();
     xhr.open('POST', url, true);
     xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState === 4 && xhr.status === 200) {
-        console.log('Successfully signed in!');
-        alertMessage('success', `Successfully signed in!`);
-        const response = JSON.parse(xhr.responseText);
-          if (response.admin) {
-              window.location.href = '/admin/dashboard';
-          }
 
-      } else if (xhr.status === 500) {
-        const response = JSON.parse(xhr.responseText);
-        alertMessage('error', `Sorry, an error occurred while attempting to log in: ${response.error || 'Unknown error'}`);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {  // Always check readyState before status
+            spinner.classList.add('hidden'); // Hide spinner after response
 
-      }
-    }
-    xhr.send(JSON.stringify({ username: username, password: password }));
-  }
+            if (xhr.status === 200) {
+                const response = JSON.parse(xhr.responseText);
+                alertMessage('success', `Successfully signed in!`);
+                
+                if (response.admin) {
+                    window.location.href = '/admin/dashboard';
+                } else {
+                    window.location.href = '/dashboard';
+                }
+            } else {
+                const errorResponse = JSON.parse(xhr.responseText);
+                alertMessage('error', `Login failed: ${errorResponse.message}`);
+            }
+        }
+    };
+
+    xhr.send(JSON.stringify({ username, password }));
+}
+
 
 </script>

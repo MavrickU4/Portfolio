@@ -2,6 +2,7 @@
 import jwt from 'jsonwebtoken';
 import { Secret } from '../../config/config.js';
 import nodemailer from 'nodemailer';
+import Users from '../models/user.js';
 
 export const companyEmail = 'tim.upton4@gmail.com';
 export const personalEmail = 'tim.upton4@gmail.com';
@@ -41,35 +42,30 @@ export async function AdminAuthGuard(req, res, next) {
     const userId = req.user ? req.user.id : null;
 
     if (!userId) {
+      console.log('AdminAuthGuard: No user ID');
       req.flash('error', 'Access Not Granted.');
-      return res.redirect('/home'); 
+      return res.redirect('/home');
+    }
+
+    const user = await Users.findById(userId);
+
+    if (user && user.admin === true || user.admin === 'true') { 
+      console.log('AdminAuthGuard: Admin access granted');
+      return next();
     } else {
-        // If the user is not an admin or doesn't exist, check the TeamMembers collection
-        const teamMember = await Users.findById(UserID(req));
-        if (teamMember) {
-          if (teamMember.admin === true) {
-            sharedState.active = true;
-              return next();
-          } else {
-            sharedState.active = false;
-            sharedState.pinAuth = true;
-          return next(); // Allow team member to proceed
-          }
-        } else {
-        let user = await Users.findById(UserID(req));
-          if (user && user.admin) {
-            return next(); // Allow admin user to proceed
-          }
-        }
-    req.flash('error', 'Access Not Granted.');
-    return res.redirect('/');
-  }
+      console.log('AdminAuthGuard: Not an admin user');
+      req.flash('error', 'Access Not Granted.');
+      return res.redirect('/home');
+    }
   } catch (error) {
     console.error('Error in AdminAuthGuard:', error);
     req.flash('error', 'Access Not Granted.');
     return res.redirect('/home');
   }
 }
+
+
+
 
 export function GenerateToken(user){
     const payload = {

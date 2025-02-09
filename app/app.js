@@ -127,10 +127,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Auth Step 7 - Implementing the Auth Strategy
-passport.use(Users.createStrategy());
+// passport.use(Users.createStrategy());
 
 // passport.use(TeamMembers.createStrategy());
-// passport.use('team-member-local', TeamMembers.createStrategy());
+passport.use('local', Users.createStrategy());
 
 // Local Strategy for TeamMember
 // passport.use(new JWTStrategy(jwtOptions, async (jwt_payload, done) => {
@@ -159,51 +159,51 @@ passport.use(Users.createStrategy());
 
 
 // Auth Step 8 - Setup serialization and deserialization
-// passport.serializeUser(User.serializeUser());
-// passport.deserializeUser(User.deserializeUser());
+passport.serializeUser(Users.serializeUser());
+passport.deserializeUser(Users.deserializeUser());
 
-// passport.serializeUser((user, done) => {
-//     const userPrototype = Object.getPrototypeOf(user);
+passport.serializeUser((user, done) => {
+    const userPrototype = Object.getPrototypeOf(user);
 
-//     if (userPrototype === Customers.prototype) {
-//         // console.log('Serializing as Customer:', user.id);  // Logging
-//         done(null, { id: user.id, type: 'Customer' });
-//     } else if (userPrototype === TeamMembers.prototype) {
-//         // console.log('Serializing as TeamMember:', user.id);  // Logging
-//         done(null, { id: user.id, type: 'TeamMember' });
-//     } else {
-//         console.error('Unknown user type during serialization');
-//         done(new Error('Unknown customer type'), null);
-//     }
-// });
+    if (userPrototype === Users.prototype) {
+        // console.log('Serializing as Customer:', user.id);  // Logging
+        done(null, { id: user.id, type: 'User' });
+    } else if (userPrototype === TeamMembers.prototype) {
+        // console.log('Serializing as TeamMember:', user.id);  // Logging
+        done(null, { id: user.id, type: 'TeamMember' });
+    } else {
+        console.error('Unknown user type during serialization');
+        done(new Error('Unknown customer type'), null);
+    }
+});
 
-// passport.deserializeUser(async (obj, done) => {
-//     try {
-//         // console.log('Deserializing:', obj);  // Logging to see the object being deserialized
+passport.deserializeUser(async (obj, done) => {
+    try {
+        // console.log('Deserializing:', obj);  // Logging to see the object being deserialized
 
-//         if (obj.type === 'Customer') {
-//             const customer = await Customers.findById(obj.id);
-//             if (!customer) {
-//                 console.error('Customer not found during deserialization');
-//                 return done(new Error('Customer not found'), null);
-//             }
-//             done(null, customer);
-//         } else if (obj.type === 'TeamMember') {
-//             const teamMember = await TeamMembers.findById(obj.id);
-//             if (!teamMember) {
-//                 console.error('TeamMember not found during deserialization');
-//                 return done(new Error('TeamMember not found'), null);
-//             }
-//             done(null, teamMember);
-//         } else {
-//             console.error('Unknown customer type during deserialization');
-//             done(new Error('Unknown customer type'), null);
-//         }
-//     } catch (err) {
-//         console.error('Error in deserialization:', err);
-//         done(err, null);
-//     }
-// });
+        if (obj.type === 'User') {
+            const customer = await Users.findById(obj.id);
+            if (!customer) {
+                console.error('Customer not found during deserialization');
+                return done(new Error('Customer not found'), null);
+            }
+            done(null, customer);
+        } else if (obj.type === 'TeamMember') {
+            const teamMember = await TeamMembers.findById(obj.id);
+            if (!teamMember) {
+                console.error('TeamMember not found during deserialization');
+                return done(new Error('TeamMember not found'), null);
+            }
+            done(null, teamMember);
+        } else {
+            console.error('Unknown customer type during deserialization');
+            done(new Error('Unknown customer type'), null);
+        }
+    } catch (err) {
+        console.error('Error in deserialization:', err);
+        done(err, null);
+    }
+});
 
 // Setup ViewEngine EJS
 app.set('views', path.join(__dirname, '/views'));
