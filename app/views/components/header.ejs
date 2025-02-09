@@ -1,11 +1,67 @@
+<div id="loading-div" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50">
+  <div class="w-16 h-16 border-4 border-t-blue-500 border-blue-200 rounded-full animate-spin"></div>
+</div>
+
+<% if (successMessage && successMessage.length > 0) { %> 
+  <div id="success-added-cart-item-label-loggedin" class="fixed top-16 right-4 z-50">
+    <div class="rounded-md bg-green-100 p-4">
+      <div class="flex">
+        <div class="flex-shrink-0">
+          <svg class="h-5 w-5 text-green-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <!-- Your SVG path here -->
+          </svg>
+        </div>
+        <div class="ml-3">
+          <p class="font-custom lg:<% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> text-4xl font-medium text-green-800"><%= successMessage %></p>
+        </div>
+        <div class="ml-auto pl-3">
+          <div class="-mx-1.5 -my-1.5">
+            <button type="button" onclick="document.getElementById('success-added-cart-item-label-loggedin').style.display = 'none';" class="inline-flex rounded-md bg-green-100 p-1.5 text-green-500 hover:bg-green-50 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2 focus:ring-offset-green-100">
+              <span class="sr-only">Dismiss</span>
+              <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>  
+  <% } %>
+  <% if (errorMessage && errorMessage.length > 0) { %> 
+    <div id="error-added-cart-item-label-loggedin" class="fixed top-16 right-4 z-50">
+      <div class="rounded-md bg-green-100 p-4">
+        <div class="flex">
+          <div class="flex-shrink-0">
+            <svg class="h-5 w-5 text-green-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <!-- Your SVG path here -->
+            </svg>
+          </div>
+          <div class="ml-3">
+            <p class="font-custom lg:<% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> text-4xl font-medium text-green-800"><%= errorMessage %></p>
+          </div>
+          <div class="ml-auto pl-3">
+            <div class="-mx-1.5 -my-1.5">
+              <button type="button" onclick="document.getElementById('error-added-cart-item-label-loggedin').style.display = 'none';" class="inline-flex rounded-md bg-green-100 p-1.5 text-green-500 hover:bg-green-50 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2 focus:ring-offset-green-100">
+                <span class="sr-only">Dismiss</span>
+                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  
+    <% } %>
 
 <header class="bg-white shadow">
   <div class="mx-auto max-w-7xl px-2 sm:px-4 lg:divide-y lg:divide-gray-200 lg:px-8">
-    <div class="relative flex h-16 justify-between">
+    <div class="relative flex <% if (mobile) { %> h-24 <% } else { %> h-16 <% } %> justify-between">
       <div class="relative z-10 flex px-2 lg:px-0">
         <div class="flex flex-shrink-0 items-center">
           <a href="/">
-          <img class="h-8 w-auto" src="../../../public/content/images/logo.png" alt="Tim Upton">
+          <img class="<% if (mobile) { %> h-12 <% } else { %> h-8 <% } %>  w-auto" src="../../../public/content/images/logo.png" alt="Tim Upton">
         </a>
         </div>
       </div>
@@ -14,11 +70,11 @@
           <label for="search" class="sr-only">Search</label>
           <div class="relative">
             <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-              <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <svg class="<% if (mobile) { %> h-10 w-10 <% } else { %> h-5 w-5 <% } %> text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                 <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
               </svg>
             </div>
-            <input id="search" name="search" class="block w-full rounded-md border-0 bg-white py-1.5 pl-10 pr-3 text-[#121827] ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Search" type="search">
+            <input id="search" name="search" class="block w-full rounded-md border-0 bg-white  pr-3 text-[#121827] ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:<% if (mobile) { %>  text-3xl py-2 pl-20 <% } else { %> text-sm  py-1.5 pl-10 <% } %> sm:leading-6" placeholder="Search" type="search">
           </div>
         </div>
       </div>
@@ -27,10 +83,10 @@
         <button id="pages-button" type="button" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" aria-controls="mobile-menu" aria-expanded="false">
           <span class="absolute -inset-0.5"></span>
           <span class="sr-only">Open menu</span>
-          <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+          <svg class="block <% if (mobile) { %> h-12 w-12 <% } else { %> h-6 w-6 <% } %>" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
           </svg>
-          <svg class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+          <svg class="hidden <% if (mobile) { %> h-12 w-12 <% } else { %> h-6 w-6 <% } %> " fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
@@ -39,7 +95,7 @@
         <button type="button" class="relative flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
           <span class="absolute -inset-1.5"></span>
           <span class="sr-only">View notifications</span>
-          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+          <svg class="<% if (mobile) { %> h-12 w-12 <% } else { %> h-6 w-6 <% } %>" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
           </svg>
         </button>
@@ -66,21 +122,21 @@
           -->
           <div class="hidden absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
             <!-- Active: "bg-gray-100", Not Active: "" -->
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
+            <a href="#" class="block px-4 py-2 <% if (mobile) { %>  text-3xl <% } else { %> text-sm <% } %> text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
+            <a href="#" class="block px-4 py-2 <% if (mobile) { %>  text-3xl <% } else { %> text-sm <% } %> text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
+            <a href="#" class="block px-4 py-2 <% if (mobile) { %>  text-3xl <% } else { %> text-sm <% } %> text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
           </div>
         </div>
       </div>
     </div>
     <nav class="hidden lg:flex lg:space-x-8 lg:py-2" aria-label="Global">
       <!-- Current: "bg-gray-100 text-[#121827]", Default: "text-[#121827] hover:bg-gray-50 hover:text-[#121827]" -->
-      <a href="/" class="<%= page === 'home' ? 'bg-[#F5B840] text-[#121827] hover:bg-[#edc376] hover:text-[#121827]' : 'text-[#121827] hover:bg-gray-50 hover:text-[#121827]' %>  inline-flex items-center rounded-md py-2 px-3 text-sm font-medium" aria-current="page">Dashboard</a>
-      <a href="/about" class="<%= page === 'about' ? 'bg-[#F5B840] text-[#121827] hover:bg-[#edc376] hover:text-[#121827]' : 'text-[#121827] hover:bg-gray-50 hover:text-[#121827]' %> inline-flex items-center rounded-md py-2 px-3 text-sm font-medium">About</a>
-       <a href="/projects" class="<%= page === 'projects' ? 'bg-[#F5B840] text-[#121827] hover:bg-[#edc376] hover:text-[#121827]' : 'text-[#121827] hover:bg-gray-50 hover:text-[#121827]' %>  inline-flex items-center rounded-md py-2 px-3 text-sm font-medium">Projects</a>
-      <a href="/services" class="<%= page === 'services' ? 'bg-[#F5B840] text-[#121827] hover:bg-[#edc376] hover:text-[#121827]' : 'text-[#121827] hover:bg-gray-50 hover:text-[#121827]' %>  inline-flex items-center rounded-md py-2 px-3 text-sm font-medium">Services</a>
-      <a href="/education" class="<%= page === 'education' ? 'bg-[#F5B840] text-[#121827] hover:bg-[#edc376] hover:text-[#121827]' : 'text-[#121827] hover:bg-gray-50 hover:text-[#121827]' %>  inline-flex items-center rounded-md py-2 px-3 text-sm font-medium">Education</a>
-      <a href="/contact" class="<%= page === 'contact' ? 'bg-[#F5B840] text-[#121827] hover:bg-[#edc376] hover:text-[#121827]' : 'text-[#121827] hover:bg-gray-50 hover:text-[#121827]' %>  inline-flex items-center rounded-md py-2 px-3 text-sm font-medium">Contact</a>
+      <a href="/" class="<%= page === 'home' ? 'bg-[#F5B840] text-[#121827] hover:bg-[#edc376] hover:text-[#121827]' : 'text-[#121827] hover:bg-gray-50 hover:text-[#121827]' %>  inline-flex items-center rounded-md py-2 px-3 <% if (mobile) { %>  text-3xl <% } else { %> text-sm <% } %> " aria-current="page">Dashboard</a>
+      <a href="/about" class="<%= page === 'about' ? 'bg-[#F5B840] text-[#121827] hover:bg-[#edc376] hover:text-[#121827]' : 'text-[#121827] hover:bg-gray-50 hover:text-[#121827]' %> inline-flex items-center rounded-md py-2 px-3 <% if (mobile) { %>  text-3xl <% } else { %> text-sm <% } %> ">About</a>
+       <a href="/projects" class="<%= page === 'projects' ? 'bg-[#F5B840] text-[#121827] hover:bg-[#edc376] hover:text-[#121827]' : 'text-[#121827] hover:bg-gray-50 hover:text-[#121827]' %>  inline-flex items-center rounded-md py-2 px-3 <% if (mobile) { %>  text-3xl <% } else { %> text-sm <% } %> ">Projects</a>
+      <a href="/services" class="<%= page === 'services' ? 'bg-[#F5B840] text-[#121827] hover:bg-[#edc376] hover:text-[#121827]' : 'text-[#121827] hover:bg-gray-50 hover:text-[#121827]' %>  inline-flex items-center rounded-md py-2 px-3 <% if (mobile) { %>  text-3xl <% } else { %> text-sm <% } %> ">Services</a>
+      <a href="/education" class="<%= page === 'education' ? 'bg-[#F5B840] text-[#121827] hover:bg-[#edc376] hover:text-[#121827]' : 'text-[#121827] hover:bg-gray-50 hover:text-[#121827]' %>  inline-flex items-center rounded-md py-2 px-3 <% if (mobile) { %>  text-3xl <% } else { %> text-sm <% } %> ">Education</a>
+      <a href="/contact" class="<%= page === 'contact' ? 'bg-[#F5B840] text-[#121827] hover:bg-[#edc376] hover:text-[#121827]' : 'text-[#121827] hover:bg-gray-50 hover:text-[#121827]' %>  inline-flex items-center rounded-md py-2 px-3 <% if (mobile) { %>  text-3xl <% } else { %> text-sm <% } %> ">Contact</a>
     </nav>
   </div>
 
@@ -89,22 +145,22 @@
     <span class="lg:flex lg:items-center">
     </span>
     <div id="pages-button" class="space-y-1 px-2 pb-3 pt-2">
-      <label class="hover:cursor-pointer bg-[#121827] text-white hover:bg-[#1D2A45] block rounded-md py-2 px-3 text-base font-medium" aria-current="page"><%= page.charAt(0).toUpperCase() + page.slice(1) %> Page 
-      <svg class=" h-5 w-5 text-white inline" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+      <label class="hover:cursor-pointer bg-[#121827] text-white hover:bg-[#1D2A45] block rounded-md py-2 px-3 <% if (mobile) { %> text-3xl <% } else { %> text-base <% } %> " aria-current="page"><%= page.charAt(0).toUpperCase() + page.slice(1) %> Page 
+      <svg class=" <% if (mobile) { %> h-12 w-12 <% } else { %> h-6 w-6 <% } %> text-white inline" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
         <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
       </svg>
     </label>
     </div>
   </nav>
   <nav class="hidden lg:hidden" aria-label="Global" id="mobile-menu">
-    <div class="space-y-1 px-2 pb-3 pt-2">
+    <div class=" <% if (mobile) { %> space-y-6 <% } else { %> space-y-1 <% } %> px-2 pb-3 pt-2">
       <!-- Current: "bg-gray-100 text-[#121827]", Default: "text-[#121827] hover:bg-gray-50 hover:text-[#121827]" -->
-      <a href="/" class="<%= page === 'home' ? 'bg-[#F5B840] text-[#121827] hover:bg-[#edc376] hover:text-[#121827]' : 'text-[#121827] hover:bg-gray-50 hover:text-[#121827]' %>  block rounded-md py-2 px-3 text-base font-medium" aria-current="page">Home</a>
-      <a href="/about" class="<%= page === 'about' ? 'bg-[#F5B840] text-[#121827] hover:bg-[#edc376] hover:text-[#121827]' : 'text-[#121827] hover:bg-gray-50 hover:text-[#121827]' %>  block rounded-md py-2 px-3 text-base font-medium">About</a>
-      <a href="/projects" class="<%= page === 'projects' ? 'bg-[#F5B840] text-[#121827] hover:bg-[#edc376] hover:text-[#121827]' : 'text-[#121827] hover:bg-gray-50 hover:text-[#121827]' %>  block rounded-md py-2 px-3 text-base font-medium">Projects</a>
-      <a href="/services" class="<%= page === 'services' ? 'bg-[#F5B840] text-[#121827] hover:bg-[#edc376] hover:text-[#121827]' : 'text-[#121827] hover:bg-gray-50 hover:text-[#121827]' %>  block rounded-md py-2 px-3 text-base font-medium">Services</a>
-      <a href="/education" class="<%= page === 'services' ? 'bg-[#F5B840] text-[#121827] hover:bg-[#edc376] hover:text-[#121827]' : 'text-[#121827] hover:bg-gray-50 hover:text-[#121827]' %>  block rounded-md py-2 px-3 text-base font-medium">Education</a>
-      <a href="/contact" class="<%= page === 'contact' ? 'bg-[#F5B840] text-[#121827] hover:bg-[#edc376] hover:text-[#121827]' : 'text-[#121827] hover:bg-gray-50 hover:text-[#121827]' %>  block rounded-md py-2 px-3 text-base font-medium">Contact</a>
+      <a href="/" class="<%= page === 'home' ? 'bg-[#F5B840] text-[#121827] hover:bg-[#edc376] hover:text-[#121827]' : 'text-[#121827] hover:bg-gray-50 hover:text-[#121827]' %>  block rounded-md py-2 px-3 <% if (mobile) { %> text-3xl <% } else { %> text-base <% } %> " aria-current="page">Home</a>
+      <a href="/about" class="<%= page === 'about' ? 'bg-[#F5B840] text-[#121827] hover:bg-[#edc376] hover:text-[#121827]' : 'text-[#121827] hover:bg-gray-50 hover:text-[#121827]' %>  block rounded-md py-2 px-3 <% if (mobile) { %> text-3xl <% } else { %> text-base <% } %> ">About</a>
+      <a href="/projects" class="<%= page === 'projects' ? 'bg-[#F5B840] text-[#121827] hover:bg-[#edc376] hover:text-[#121827]' : 'text-[#121827] hover:bg-gray-50 hover:text-[#121827]' %>  block rounded-md py-2 px-3 <% if (mobile) { %> text-3xl <% } else { %> text-base <% } %> ">Projects</a>
+      <a href="/services" class="<%= page === 'services' ? 'bg-[#F5B840] text-[#121827] hover:bg-[#edc376] hover:text-[#121827]' : 'text-[#121827] hover:bg-gray-50 hover:text-[#121827]' %>  block rounded-md py-2 px-3 <% if (mobile) { %> text-3xl <% } else { %> text-base <% } %> ">Services</a>
+      <a href="/education" class="<%= page === 'education' ? 'bg-[#F5B840] text-[#121827] hover:bg-[#edc376] hover:text-[#121827]' : 'text-[#121827] hover:bg-gray-50 hover:text-[#121827]' %>  block rounded-md py-2 px-3 <% if (mobile) { %> text-3xl <% } else { %> text-base <% } %> ">Education</a>
+      <a href="/contact" class="<%= page === 'contact' ? 'bg-[#F5B840] text-[#121827] hover:bg-[#edc376] hover:text-[#121827]' : 'text-[#121827] hover:bg-gray-50 hover:text-[#121827]' %>  block rounded-md py-2 px-3 <% if (mobile) { %> text-3xl <% } else { %> text-base <% } %> ">Contact</a>
     </div>
     <div class="hidden border-t border-gray-200 pb-3 pt-4">
       <div class="flex items-center px-4">
@@ -112,8 +168,8 @@
           <img class="h-10 w-10 rounded-full" src="../../../public/content/images/About.png" alt="">
         </div> -->
         <div class="ml-3">
-          <div class="text-base font-medium text-gray-800">Tom Cook</div>
-          <div class="text-sm font-medium text-gray-500">tom@example.com</div>
+          <div class="<% if (mobile) { %> text-3xl <% } else { %> text-base <% } %>  text-gray-800">Tom Cook</div>
+          <div class="<% if (mobile) { %>  text-3xl <% } else { %> text-sm <% } %>  text-gray-500">tom@example.com</div>
         </div>
         <button type="button" class="relative ml-auto flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
           <span class="absolute -inset-1.5"></span>
@@ -124,9 +180,9 @@
         </button>
       </div>
       <div class="mt-3 space-y-1 px-2">
-        <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-[#121827]">Your Profile</a>
-        <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-[#121827]">Settings</a>
-        <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-[#121827]">Sign out</a>
+        <a href="#" class="block rounded-md px-3 py-2 <% if (mobile) { %> text-3xl <% } else { %> text-base <% } %>  text-gray-500 hover:bg-gray-50 hover:text-[#121827]">Your Profile</a>
+        <a href="#" class="block rounded-md px-3 py-2 <% if (mobile) { %> text-3xl <% } else { %> text-base <% } %>  text-gray-500 hover:bg-gray-50 hover:text-[#121827]">Settings</a>
+        <a href="#" class="block rounded-md px-3 py-2 <% if (mobile) { %> text-3xl <% } else { %> text-base <% } %>  text-gray-500 hover:bg-gray-50 hover:text-[#121827]">Sign out</a>
       </div>
     </div>
   </nav>
@@ -136,4 +192,34 @@
       document.getElementById('pages-button').addEventListener('click', function(){
       document.getElementById('mobile-menu').classList.toggle('hidden');
     })
+
+    function alertMessage(type, message) {
+  const alertDiv = document.createElement('div');
+  alertDiv.classList.add(
+  'fixed', 'top-4', 'right-4',
+  'z-50', 'w-full', 'max-w-md', 'px-4', 'py-2', 'text-center',
+  'rounded', 'shadow-lg'
+);
+
+
+  // Set alert style based on the type
+  if (type === 'success') {
+    alertDiv.classList.add('bg-green-100', 'text-green-800', 'border', 'border-green-200');
+  } else if (type === 'warning') {
+    alertDiv.classList.add('bg-yellow-100', 'text-yellow-800', 'border', 'border-yellow-200');
+  } else if (type === 'error') {
+    alertDiv.classList.add('bg-red-100', 'text-red-800', 'border', 'border-red-200');
+  }
+
+  alertDiv.textContent = message;
+
+  // Add to the document body
+  document.body.appendChild(alertDiv);
+
+  // Remove alert after 5 seconds
+  setTimeout(() => {
+    alertDiv.remove();
+  }, 5000);
+}
+
 </script>

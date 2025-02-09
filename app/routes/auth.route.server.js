@@ -3,22 +3,22 @@ import axios from 'axios';
 import {Router} from 'express';
 import { displayLoginPage, 
     DisplayRegisterPage, 
-    ProcessLoginPage,
+    processLoginPage,
     ProcessLogoutPage,
-    ProcessRegisterPage} from '../controllers/auth.controller.server.js';
+    processRegisterPage} from '../controllers/auth.controller.server.js';
 
 const router = Router();
 
 // Display Login Page
 router.get('/login', displayLoginPage);
 // Process Login Page
-router.post('/login', ProcessLoginPage);
+router.post('/login', processLoginPage);
 
 
 // Display Registration Page
 router.get('/register', DisplayRegisterPage);
 // Process Registration page
-router.post('/register', ProcessRegisterPage);
+router.post('/register', processRegisterPage);
 
 // Process Logout Page
 router.get('/logout', ProcessLogoutPage);

@@ -35,7 +35,7 @@ let ExtractJWT = passportJWT.ExtractJwt;
 let localStrategy = passportLocal.Strategy;
 
 // Auth Step 3 - import the user model
-// import User from './models/user.js';
+import Users from './models/user.js';
 // import Customers from './models/customers.js';
 // import TeamMembers from './models/team-members.js';
 
@@ -48,6 +48,7 @@ import { MongoURI, Secret } from '../config/config.js';
 // Import Routes
 import indexRouter from './routes/index.route.server.js';
 import adRouter from './routes/ad.route.server.js';
+import adminRouter from './routes/admin.route.server.js';
 import authRouter from './routes/auth.route.server.js';
 import logsRouter from './routes/logs.route.server.js';
 import profileRouter from './routes/profile.route.server.js';
@@ -66,17 +67,17 @@ let jwtOptions = {
 };
 
 // Setup JWT Strategy
-// let strategy = new JWTStrategy(jwtOptions, (jwt_payload, done) => {
-//     User.findById(jwt_payload.id)
-//         .then(user => {
-//             return done(null, user);
-//         })
-//         .catch(err => {
-//             return done(err, false);
-//         });
-// });
+let strategy = new JWTStrategy(jwtOptions, (jwt_payload, done) => {
+    Users.findById(jwt_payload.id)
+        .then(user => {
+            return done(null, user);
+        })
+        .catch(err => {
+            return done(err, false);
+        });
+});
 
-// passport.use(strategy);
+passport.use(strategy);
 
 // Instantiate Express Application
 const app = express();
@@ -84,7 +85,7 @@ const app = express();
 // Set the strictQuery option before connecting to MongoDB
 mongoose.set('strictQuery', true);
 
-// Complete the DB Configuration
+// // Complete the DB Configuration
 mongoose.connect(MongoURI).then(() => {
     console.log('MongoDB connected');
 }).catch((err) => {
@@ -126,7 +127,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Auth Step 7 - Implementing the Auth Strategy
-// passport.use(Customers.createStrategy());
+passport.use(Users.createStrategy());
 
 // passport.use(TeamMembers.createStrategy());
 // passport.use('team-member-local', TeamMembers.createStrategy());
@@ -211,6 +212,7 @@ app.set('view engine', 'ejs');
 // Use Routes
 app.use('/', indexRouter);
 app.use('/', adRouter);
+app.use('/', adminRouter);
 app.use('/', authRouter);
 app.use('/', logsRouter);
 app.use('/', profileRouter);
@@ -225,21 +227,6 @@ app.use(express.static(path.join(__dirname, '../uploads')));
 app.use('/uploads', express.static('uploads'));
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
-// mongoose.connection.on('open', () => {
-//     console.log("Connected to MongoDB");
-//     async function updateProjectStatuses() {
-//         try {
-//             const result = await Project.updateMany(
-//                 { status: "Picked Up" },
-//                 { $set: { status: "Picked Up" } }
-//             );
-//             console.log(`Updated ${result.nModified} projects.`);
-//         } catch (error) {
-//             console.error('Error updating project statuses:', error);
-//         }
-//     }
-//     updateProjectStatuses();
-// });
 
 mongoose.connection.on('error', () => console.log("Mongo Connection Error"));
 console.log('Server Running...');

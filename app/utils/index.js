@@ -36,6 +36,41 @@ export function AuthGuard(req, res, next){
     next();
 }
 
+export async function AdminAuthGuard(req, res, next) {
+  try {
+    const userId = req.user ? req.user.id : null;
+
+    if (!userId) {
+      req.flash('error', 'Access Not Granted.');
+      return res.redirect('/home'); 
+    } else {
+        // If the user is not an admin or doesn't exist, check the TeamMembers collection
+        const teamMember = await Users.findById(UserID(req));
+        if (teamMember) {
+          if (teamMember.admin === true) {
+            sharedState.active = true;
+              return next();
+          } else {
+            sharedState.active = false;
+            sharedState.pinAuth = true;
+          return next(); // Allow team member to proceed
+          }
+        } else {
+        let user = await Users.findById(UserID(req));
+          if (user && user.admin) {
+            return next(); // Allow admin user to proceed
+          }
+        }
+    req.flash('error', 'Access Not Granted.');
+    return res.redirect('/');
+  }
+  } catch (error) {
+    console.error('Error in AdminAuthGuard:', error);
+    req.flash('error', 'Access Not Granted.');
+    return res.redirect('/home');
+  }
+}
+
 export function GenerateToken(user){
     const payload = {
         id: user._id,
@@ -79,4 +114,5 @@ export async function sendEmail(subject, body, toEmail, fromEmail) {
       console.error('Error sending email:', error);
     }
 }
+
 

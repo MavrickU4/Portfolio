@@ -5,6 +5,7 @@ import Projects from "../models/projects.js";
 
 export function displayHomePage(req, res, next) {
     res.render('index', { title: 'Home', page: 'home', userID: UserID(req), displayName: UserDisplayName(req), 
+        successMessage: req.flash('successMessage'), errorMessage: req.flash('errorMessage'),
         mobile: mobileCheck(req),  } );
 };
 

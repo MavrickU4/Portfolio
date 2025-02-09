@@ -3,22 +3,21 @@
     <div class="mx-auto max-w-2xl lg:mx-0">
       <h2 class="text-4xl font-bold tracking-tight text-white sm:text-6xl">Education</h2>
       <p class="mt-2 mb-6 text-lg leading-8 text-gray-300">Formal Education and Skill Sets</p>
-      <a href="../../../public/content/files/Tims CV.pdf" class="mt-4 ring ring-white py-2 px-8 rounded-full text-sm font-semibold leading-6 text-white">See my resume <span aria-hidden="true">→</span></a>
+      <a href="../../../public/content/files/Tims CV.pdf" class="mt-4 ring ring-white py-2 px-8 rounded-full <% if (mobile) { %> text-3xl <% } else { %> text-sm leading-6 <% } %> font-semibold text-white">See my resume <span aria-hidden="true">→</span></a>
    
     </div>
   </div>
 </div>
 
-
 <div class="max-w-7xl mx-auto py-8 px-4">
     <div class=" mb-6">
-    <h2 class="text-3xl text-center font-bold tracking-tight text-[#121827] sm:text-3xl">Formal Education & Experience</h2>
+    <h2 class="<% if (mobile) { %> text-5xl <% } else { %> text-3xl <% } %> text-center font-bold tracking-tight text-[#121827] sm:<% if (mobile) { %> text-5xl <% } else { %> text-3xl <% } %>">Formal Education & Experience</h2>
     </div>
     <ul role="list" class="grid grid-cols-1 gap-x-6 gap-y-8 lg:grid-cols-3 xl:gap-x-8">
             <li class="overflow-hidden rounded-xl border border-gray-200">
               <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 p-6">
                 <img src="../../../public/content/images/education/cc.png" alt="Tuple" class="h-12 w-12 flex-none rounded-lg bg-white object-cover ring-1 ring-gray-900/10">
-                <div class="text-sm font-medium leading-6 text-gray-900">Software Engineering Technician
+                <div class="<% if (mobile) { %> text-3xl <% } else { %> text-sm leading-6 <% } %> font-medium  text-gray-900">Software Engineering Technician
                     <p class="text-gray-500">Centenial College</p>
                 </div>
                 <div class="relative ml-auto">
@@ -31,12 +30,12 @@
 
                   <div class="absolute right-0 z-10 mt-0.5 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu-0-button" tabindex="-1">
                    
-                    <a href="#" class="block px-3 py-1 text-sm leading-6 text-gray-900" role="menuitem" tabindex="-1" id="options-menu-0-item-0">View<span class="sr-only">, Tuple</span></a>
-                    <a href="#" class="block px-3 py-1 text-sm leading-6 text-gray-900" role="menuitem" tabindex="-1" id="options-menu-0-item-1">Edit<span class="sr-only">, Tuple</span></a>
+                    <a href="#" class="block px-3 py-1 <% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> leading-6 text-gray-900" role="menuitem" tabindex="-1" id="options-menu-0-item-0">View<span class="sr-only">, Tuple</span></a>
+                    <a href="#" class="block px-3 py-1 <% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> leading-6 text-gray-900" role="menuitem" tabindex="-1" id="options-menu-0-item-1">Edit<span class="sr-only">, Tuple</span></a>
                   </div> -->
                 </div>
               </div>
-              <dl class="-my-3 divide-y divide-gray-100 px-6 py-4 text-sm leading-6">
+              <dl class="-my-3 divide-y divide-gray-100 px-6 py-4 <% if (mobile) { %> text-3xl <% } else { %> text-sm leading-6 <% } %>">
                 <div class="flex justify-between gap-x-4 py-3">
                   <dt class="text-gray-500">Graduated</dt>
                   <dd class="text-gray-700"><time datetime="2022-12-13">Sept 2023</time></dd>
@@ -53,13 +52,13 @@
             <li class="overflow-hidden rounded-xl border border-gray-200">
                 <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 p-6">
                   <img src="../../../public/content/images/education/caf.jpeg" alt="Tuple" class="h-12 w-12 flex-none rounded-lg bg-white object-cover ring-1 ring-gray-900/10">
-                  <div class="text-sm font-medium leading-6 text-gray-900">Avionics Technician
+                  <div class="<% if (mobile) { %> text-3xl <% } else { %> text-sm leading-6 <% } %> font-medium text-gray-900">Avionics Technician
                       <p class="text-gray-500">Canadian Forces</p>
                   </div>
                   <div class="relative ml-auto">
                   </div>
                 </div>
-                <dl class="-my-3 divide-y divide-gray-100 px-6 py-4 text-sm leading-6">
+                <dl class="-my-3 divide-y divide-gray-100 px-6 py-4 <% if (mobile) { %> text-3xl <% } else { %> text-sm leading-6 <% } %> ">
                   <div class="flex justify-between gap-x-4 py-3">
                     <dt class="text-gray-500">Graduated</dt>
                     <dd class="text-gray-700"><time datetime="2022-12-13">June 2014</time></dd>
@@ -69,13 +68,13 @@
               <li class="overflow-hidden rounded-xl border border-gray-200">
                 <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 p-6">
                   <img src="../../../public/content/images/education/cf.jpeg" alt="Tuple" class="h-12 w-12 flex-none rounded-lg bg-white object-cover ring-1 ring-gray-900/10">
-                  <div class="text-sm font-medium leading-6 text-gray-900">Infantier
+                  <div class="<% if (mobile) { %> text-3xl <% } else { %> text-sm leading-6 <% } %> font-medium text-gray-900">Infantier
                       <p class="text-gray-500">Canadian Forces</p>
                   </div>
                   <div class="relative ml-auto">
                   </div>
                 </div>
-                <dl class="-my-3 divide-y divide-gray-100 px-6 py-4 text-sm leading-6">
+                <dl class="-my-3 divide-y divide-gray-100 px-6 py-4 <% if (mobile) { %> text-3xl <% } else { %> text-sm leading-6 <% } %>">
                   <div class="flex justify-between gap-x-4 py-3">
                     <dt class="text-gray-500">Graduated</dt>
                     <dd class="text-gray-700"><time datetime="2022-12-13">Aug 2008</time></dd>
@@ -85,13 +84,13 @@
               <li class="overflow-hidden rounded-xl border border-gray-200">
                 <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 p-6">
                   <img src="../../../public/content/images/education/hs.jpeg" alt="Tuple" class="h-12 w-12 flex-none rounded-lg bg-white object-cover ring-1 ring-gray-900/10">
-                  <div class="text-sm font-medium leading-6 text-gray-900">Founder
+                  <div class="<% if (mobile) { %> text-3xl <% } else { %> text-sm leading-6 <% } %> font-medium  text-gray-900">Founder
                       <p class="text-gray-500">BathBomb Cards/Hello Suds Inc.</p>
                   </div>
                   <div class="relative ml-auto">
                   </div>
                 </div>
-                <dl class="-my-3 divide-y divide-gray-100 px-6 py-4 text-sm leading-6">
+                <dl class="-my-3 divide-y divide-gray-100 px-6 py-4 <% if (mobile) { %> text-3xl <% } else { %> text-sm leading-6 <% } %> ">
                   <div class="flex justify-between gap-x-4 py-3">
                     <dt class="text-gray-500">From</dt>
                     <dd class="text-gray-700"><time datetime="2022-12-13">Aug 2018 - Present</time></dd>
@@ -105,13 +104,13 @@
               <li class="overflow-hidden rounded-xl border border-gray-200">
                 <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 p-6">
                   <img src="../../../public/content/images/education/nos.png" alt="Tuple" class="h-12 w-12 flex-none rounded-lg bg-white object-cover ring-1 ring-gray-900/10">
-                  <div class="text-sm font-medium leading-6 text-gray-900">Co-Founder
+                  <div class="<% if (mobile) { %> text-3xl <% } else { %> text-sm leading-6 <% } %> font-medium  text-gray-900">Co-Founder
                       <p class="text-gray-500">ApNostic OS</p>
                   </div>
                   <div class="relative ml-auto">
                   </div>
                 </div>
-                <dl class="-my-3 divide-y divide-gray-100 px-6 py-4 text-sm leading-6">
+                <dl class="-my-3 divide-y divide-gray-100 px-6 py-4 <% if (mobile) { %> text-3xl <% } else { %> text-sm leading-6 <% } %> ">
                   <div class="flex justify-between gap-x-4 py-3">
                     <dt class="text-gray-500">From</dt>
                     <dd class="text-gray-700"><time datetime="2022-12-13">Jan 2019 - Dec 2019</time></dd>
@@ -125,13 +124,13 @@
               <li class="overflow-hidden rounded-xl border border-gray-200">
                 <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 p-6">
                   <img src="../../../public/content/images/education/bell.jpeg" alt="Tuple" class="h-12 w-12 flex-none rounded-lg bg-white object-cover ring-1 ring-gray-900/10">
-                  <div class="text-sm font-medium leading-6 text-gray-900">Satellite Installation & Repair Tech
+                  <div class="<% if (mobile) { %> text-3xl <% } else { %> text-sm leading-6 <% } %> font-medium  text-gray-900">Satellite Installation & Repair Tech
                       <p class="text-gray-500">Connected Communication</p>
                   </div>
                   <div class="relative ml-auto">
                   </div>
                 </div>
-                <dl class="-my-3 divide-y divide-gray-100 px-6 py-4 text-sm leading-6">
+                <dl class="-my-3 divide-y divide-gray-100 px-6 py-4 <% if (mobile) { %> text-3xl <% } else { %> text-sm leading-6 <% } %> ">
                   <div class="flex justify-between gap-x-4 py-3">
                     <dt class="text-gray-500">From</dt>
                     <dd class="text-gray-700"><time datetime="2022-12-13">Jan 2011 - May 2012</time></dd>
@@ -153,14 +152,14 @@
       
       <div class="bg-gray-900 py-10">
         <div class=" mb-6">
-            <h2 class="text-3xl text-center font-bold tracking-tight text-white sm:text-3xl">Skill Sets</h2>
-            <p class="text-center mt-2 text-sm text-gray-300">A list of all the skill and exposure of experience.</p>
+            <h2 class="<% if (mobile) { %> text-5xl <% } else { %> text-3xl <% } %> text-center font-bold tracking-tight text-white sm:<% if (mobile) { %> text-5xl <% } else { %> text-3xl <% } %>">Skill Sets</h2>
+            <p class="text-center mt-2 <% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> text-gray-300">A list of all the skill and exposure of experience.</p>
             
         </div>
         <div class="px-4 sm:px-6 lg:px-8">
           <div class="sm:flex sm:items-center">
             <!-- <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-              <button type="button" class="block rounded-md bg-indigo-500 px-3 py-2 text-center text-sm font-semibold text-white hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Add user</button>
+              <button type="button" class="block rounded-md bg-indigo-500 px-3 py-2 text-center <% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> font-semibold text-white hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Add user</button>
             </div> -->
           </div>
           <div class="mt-8 flow-root">
@@ -169,9 +168,9 @@
                 <table class="min-w-full divide-y divide-gray-700">
                   <thead>
                     <tr>
-                      <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-0">Skill</th>
-                      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Since</th>
-                      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Personal Rating</th>
+                      <th scope="col" class="py-3.5 pl-4 pr-3 text-left <% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> font-semibold text-white sm:pl-0">Skill</th>
+                      <th scope="col" class="px-3 py-3.5 text-left <% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> font-semibold text-white">Since</th>
+                      <th scope="col" class="px-3 py-3.5 text-left <% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> font-semibold text-white">Personal Rating</th>
                       <!-- <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
                         <span class="sr-only">Edit</span>
                       </th> -->
@@ -179,34 +178,34 @@
                   </thead>
                   <tbody class="divide-y divide-gray-800">
                     <tr>
-                      <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">Programming Languages</td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">Jan 2021</td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">HTML, JavaScript, solidity, Tailwind, C#, C# GUI, SQL & MongoDb, Node.js, express.js, CSS, Scala, Java</td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">Proficient</td>
+                      <td class="whitespace-nowrap py-4 pl-4 pr-3 <% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> font-medium text-white sm:pl-0">Programming Languages</td>
+                      <td class="whitespace-nowrap px-3 py-4 <% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> text-gray-300">Jan 2021</td>
+                      <td class="whitespace-nowrap px-3 py-4 <% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> text-gray-300">HTML, JavaScript, solidity, Tailwind, C#, C# GUI, SQL & MongoDb, Node.js, express.js, CSS, Scala, Java</td>
+                      <td class="whitespace-nowrap px-3 py-4 <% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> text-gray-300">Proficient</td>
                     </tr>
                     <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">Programming Programs</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">Jan 2021</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">Visual Studio Code, CodeX, Linux, Android Studio, Oracle, IDE outSystems, </td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">Proficient</td>
+                        <td class="whitespace-nowrap py-4 pl-4 pr-3 <% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> font-medium text-white sm:pl-0">Programming Programs</td>
+                        <td class="whitespace-nowrap px-3 py-4 <% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> text-gray-300">Jan 2021</td>
+                        <td class="whitespace-nowrap px-3 py-4 <% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> text-gray-300">Visual Studio Code, CodeX, Linux, Android Studio, Oracle, IDE outSystems, </td>
+                        <td class="whitespace-nowrap px-3 py-4 <% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> text-gray-300">Proficient</td>
                       </tr>
                       <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">Other Programs</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">Jan 2021</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">Photoshop, MS Word </td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">Proficient</td>
+                        <td class="whitespace-nowrap py-4 pl-4 pr-3 <% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> font-medium text-white sm:pl-0">Other Programs</td>
+                        <td class="whitespace-nowrap px-3 py-4 <% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> text-gray-300">Jan 2021</td>
+                        <td class="whitespace-nowrap px-3 py-4 <% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> text-gray-300">Photoshop, MS Word </td>
+                        <td class="whitespace-nowrap px-3 py-4 <% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> text-gray-300">Proficient</td>
                       </tr>
                       <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">Life Skills</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">Jan 2021</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">Leadership, Organization, Problem-solving</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">Proficient</td>
+                        <td class="whitespace-nowrap py-4 pl-4 pr-3 <% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> font-medium text-white sm:pl-0">Life Skills</td>
+                        <td class="whitespace-nowrap px-3 py-4 <% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> text-gray-300">Jan 2021</td>
+                        <td class="whitespace-nowrap px-3 py-4 <% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> text-gray-300">Leadership, Organization, Problem-solving</td>
+                        <td class="whitespace-nowrap px-3 py-4 <% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> text-gray-300">Proficient</td>
                       </tr>
                       <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">Other Qualifications</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">Jan 2021</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">First Aid, HASMAT, Harrasment Identification,</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">Proficient</td>
+                        <td class="whitespace-nowrap py-4 pl-4 pr-3 <% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> font-medium text-white sm:pl-0">Other Qualifications</td>
+                        <td class="whitespace-nowrap px-3 py-4 <% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> text-gray-300">Jan 2021</td>
+                        <td class="whitespace-nowrap px-3 py-4 <% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> text-gray-300">First Aid, HASMAT, Harrasment Identification,</td>
+                        <td class="whitespace-nowrap px-3 py-4 <% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> text-gray-300">Proficient</td>
                       </tr>
   
                     <!-- More people... -->

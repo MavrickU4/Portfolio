@@ -1,0 +1,293 @@
+
+<label onclick="window.location='/login?page=tool-box'" type="button" class="absolute z-40 top-2 right-2 border border-2 border-white flex items-center gap-x-2 rounded-md bg-black px-5 py-3 text-lg font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600">
+  Exit
+</label>
+
+<div class="flex min-h-full">
+  <div class="flex flex-1 flex-col justify-center px-4 py-12 sm:px-6 lg:flex  <% if (!mobile) { %> max-w-2xl <% } %> lg:px-20 xl:px-24">
+    <div class="mx-auto w-full <% if (mobile) { %> w-full p-16 <% } else { %> max-w-7xl <% } %>">
+      <div class="text-center">
+        <img class="hidden h-10 w-auto" src="../content/images/tb-fav.png" alt="Tool Beast">
+        <h2 class="mt-8 <% if (mobile) { %> text-5xl <% } else { %> text-2xl <% } %> font-bold leading-9 tracking-tight text-gray-900"><% if (redirect === 'tool-box') { %>GET A Tool Beast TOOL BOX ACCOUNT<% } else { %>ORGANIZE YOUR ORDERS - TRACK & MORE<% } %></h2>
+        <p class="mt-2 <% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> leading-6 text-gray-500">Create a free account</p>
+      </div>
+      <div class="w-full gap-x-4 flex <% if (mobile) { %> mt-8 text-5xl <% } else { %> mt-4 text-sm <% } %>">
+        <label onclick="showRegisterForm('personal');" class="bg-black text-center text-white hover:transition-transform hover:scale-105 hover:cursor-pointer rounded-lg w-full <% if (mobile) { %> px-4 py-4 <% } else { %> px-4 py-3 <% } %>">
+          Personal
+        </label>
+        <label onclick="showRegisterForm('business');" class="text-center bg-black text-white hover:transition-transform hover:cursor-pointer hover:scale-105 rounded-lg w-full <% if (mobile) { %> px-4 py-4 <% } else { %> px-4 py-3 <% } %>">
+          Business
+        </label>
+      </div>
+      <script>
+        function showRegisterForm(type) {
+          document.getElementById('registerForm').classList.remove('hidden');
+          if (type === 'business') {
+            document.getElementById('type-input').value = 'business';
+            document.getElementById('firstName-div').classList.add('hidden');
+            document.getElementById('firstName').value = 'Company';
+            document.getElementById('lastName-label').innerHTML = 'Company';
+            document.getElementById('lastName').placeholder = 'Company Name';
+          } else {
+            document.getElementById('type-input').value = 'personal';
+            document.getElementById('firstName-div').classList.remove('hidden');
+            document.getElementById('firstName').value = '';
+            document.getElementById('lastName-label').innerHTML = 'Last Name';
+            document.getElementById('lastName').placeholder = 'Last Name';
+          }
+          
+        }
+      </script>
+        <div class="mt-10 mx-auto items-center justify-center w-full ">
+          <div class=" <% if (mobile) { %> bg-gray-50 <% } else { %> bg-white <% } %> px-6 py-8 shadow sm:rounded-lg sm:px-12">
+          <form method="POST" id="registerForm" class="space-y-6 hidden" action="/register">
+            <input type="hidden" name="imagePath" value="/content/images/user.png">
+            <input type="hidden" id="type-input" name="type" value="personal">
+            <div class="form-group">
+              <div class="row">
+                <!-- <p class="lead"><i class="fas fa-user-shield"></i> Personal Information</p> -->
+                <div id="firstName-div" class="col-md-6 mb-3">
+                  <label id="firstName-label" for="firstName" class="font-custom <% if (mobile) { %> text-3xl hidden <% } else { %> text-sm <% } %> block font-medium leading-tight text-gray-900">First name</label>
+                  <input class="font-custom <% if (mobile) { %> text-4xl <% } else { %> text-sm <% } %> pl-2 block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:leading-6" type="text" name="firstName" id="firstName" placeholder="First Name"
+                    required>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label id="lastName-label" for="lastName" class="font-custom <% if (mobile) { %> text-3xl hidden <% } else { %> text-sm <% } %> block font-medium leading-tight text-gray-900">Last name</label>
+                  <input class="font-custom <% if (mobile) { %> text-4xl <% } else { %> text-sm <% } %> pl-2 block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:leading-6" type="text" name="lastName" id="lastName" placeholder="Last Name"
+                    required>
+                </div>
+          
+              </div>
+            </div>
+            <div class="form-group mb-3 <% if (mobile) { %> mt-1 <% } else { %> mt-1 <% } %>">
+              <div class="row">
+                <div class="col-md-12">
+                  <label for="emailAddress" class="font-custom <% if (mobile) { %> text-3xl hidden <% } else { %> text-sm <% } %> block font-medium leading-tight block font-medium leading-6 text-gray-900">Email address</label>
+                  <input type="email" class="font-custom <% if (mobile) { %> text-4xl <% } else { %> text-sm <% } %> block pl-2 block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:leading-6" id="emailAddress" name="username" required value=""
+                    placeholder="Email">
+                </div>
+              </div>
+            </div>
+            <div class="form-group <% if (mobile) { %> mt-4 <% } else { %> mt-2 <% } %> mb-3">
+              <div class="row">
+                <div class="col-md-12">
+                  <label for="password" class="font-custom <% if (mobile) { %> text-3xl hidden <% } else { %> text-sm <% } %> block font-medium leading-tight block font-medium leading-6 text-gray-900">Password</label>
+                  <input type="password" class="font-custom <% if (mobile) { %> text-4xl <% } else { %> text-sm <% } %> block font-medium pl-2 block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:leading-6" id="password" name="password" required value=""
+                    placeholder="Password">
+                </div>
+              </div>
+            </div>
+            <div class="form-group <% if (mobile) { %> mt-4 <% } else { %> mt-2 <% } %> mb-3">
+              <div class="row">
+                <div class="col-md-12">
+                  <label for="confirmPassword" class="font-custom <% if (mobile) { %> text-3xl hidden <% } else { %> text-sm <% } %> block font-medium leading-tight block font-medium leading-6 text-gray-900">Confrim Password</label>
+                  <input type="password" class="font-custom <% if (mobile) { %> text-4xl <% } else { %> text-sm <% } %> block font-medium leading-tight pl-2 block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:leading-6" id="confirmPassword" name="confirmPassword" required
+                    value="" placeholder="Confirm Password">
+                </div>
+              </div>
+            </div>
+         
+
+<div class="<% if (mobile) { %> pt-12 <% } else { %> pt-4 <% } %>">
+  <button onclick="validatePassword();" id="submitButton" type="submit" class="text-white font-custom fond-bold <% if (mobile) { %> text-4xl px-6 py-4 <% } else { %> text-sm px-3 py-2.5 <% } %> rounded-lg mt-2 flex w-full justify-center bg-[#F4833F] leading-6 text-gray-0 shadow-sm transition-transform hover:scale-105 "> <i class="fas fa-user-plus mr-2 pt-1"></i> REGISTER</button></button>
+</div>
+            <div class="d-grid gap-2 mt-2 btn-group">
+              <div class="btn-group" role="group" aria-label="Buttons">
+              </div>
+            </div>
+          </form>
+          
+          <div class="alert-message alert alert-danger mt-3" id="error-message" style="display: none;">
+          </div>
+              <script>
+              var successMessage = '<%= successMessage %>';
+              if (successMessage === ''){
+              document.getElementById('success-message').style.display = "none";
+              } else {
+              document.getElementById('success-message').style.display = "block";
+              }
+              </script>
+        </div>
+        </div>
+
+        <div class="mt-10">
+          <div class="relative">
+            <div class="absolute inset-0 flex items-center" aria-hidden="true">
+              <div class="w-full border-t border-gray-200"></div>
+            </div>
+            <!-- <div class="relative flex justify-center <% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> font-medium leading-6">
+              <span class="bg-white px-6 text-gray-900">Or register with</span>
+            </div>
+          </div>
+          <div class="mt-6 grid grid-cols-2 gap-4">
+            <a href="#" class="flex items-center border justify-center gap-3 rounded-md px-3 py-1.5 text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4285F4]">
+              <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5.62 14.38C17.74 17.79 15.9 19 12 19s-5.74-1.21-5.62-2.62L5.27 15H2v-2h3.27l-.09-.08C6.03 11.28 6 11.14 6 11c0-3.31 2.69-6 6-6s6 2.69 6 6c0 2.09-1.34 3.86-3.19 4.51L12 15h3.27l1.35 1.38z"/>
+              </svg>
+              <span class="<% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> font-semibold leading-6">Google</span>
+            </a>            
+          </div> -->
+          </div>
+        </div>
+    </div>
+  </div>
+  <div class="relative hidden w-0 flex-1 lg:block">
+    <img class="absolute inset-0 h-full w-full object-cover" src="../../../public/content/images/register-img.jpeg" alt="">
+  </div>
+</div>
+
+
+
+<script>
+  function successLoginMsg(){
+    setTimeout(() => {
+    document.getElementById('success-message').innerHTML = "You have been successfully registered.";
+  }, 500);
+  }
+
+//   function validatePassword() {
+//   var passwordInput = document.getElementById('password');
+//   var confirmPasswordInput = document.getElementById('confirmPassword');
+//   var errorMessage = document.getElementById('error-message');
+
+//   // Check if the password meets the minimum requirements
+//   var password = passwordInput.value;
+//   var hasMinimumLength = password.length >= 8;
+//   var hasUppercaseLetter = /[A-Z]/.test(password);
+//   var hasLowercaseLetter = /[a-z]/.test(password);
+//   //var hasNumber = /\d/.test(password);
+//   var hasSpecialCharacter = /[!@#$%^&*]/.test(password);
+
+//   // Check if the password matches the confirm password
+//   var isPasswordMatch = password === confirmPasswordInput.value;
+
+//   if (hasMinimumLength && hasUppercaseLetter && hasLowercaseLetter && hasNumber && hasSpecialCharacter && isPasswordMatch) {
+//     errorMessage.style.display = 'none'; // Hide the error message
+//   } else {
+//     event.preventDefault();
+//     errorMessage.style.display = 'block'; // Show the error message
+
+//     // Set the error message based on the requirements not met
+//     if (!hasMinimumLength) {
+//       errorMessage.textContent = 'Password must have at least 8 characters.';
+//     } else if (!hasUppercaseLetter) {
+//       errorMessage.textContent = 'Password must have at least one uppercase letter.';
+//     } else if (!hasLowercaseLetter) {
+//       errorMessage.textContent = 'Password must have at least one lowercase letter.';
+//     // } else if (!hasNumber) {
+//     //   errorMessage.textContent = 'Password must have at least one number.';
+//     } else if (!hasSpecialCharacter) {
+//       errorMessage.textContent = 'Password must have at least one special character.';
+//     } else if (!isPasswordMatch) {
+//       errorMessage.textContent = 'Passwords do not match.';
+//     }
+//   }
+// }
+
+function validatePassword() {
+  var passwordInput = document.getElementById('password');
+  var confirmPasswordInput = document.getElementById('confirmPassword');
+  var errorMessage = document.getElementById('error-message');
+
+  // Check if the password meets the minimum requirements
+  var password = passwordInput.value;
+  var hasMinimumLength = password.length >= 6; // Relaxed to 6 characters
+  var hasUppercaseLetter = /[A-Z]/.test(password);
+  var hasLowercaseLetter = /[a-z]/.test(password);
+
+  // Check if the password matches the confirm password
+  var isPasswordMatch = password === confirmPasswordInput.value;
+
+  // Adjusted condition with further relaxed requirements
+  if (hasMinimumLength && hasUppercaseLetter && hasLowercaseLetter && isPasswordMatch) {
+    errorMessage.style.display = 'none'; // Hide the error message
+  } else {
+    event.preventDefault();
+    errorMessage.style.display = 'block'; // Show the error message
+
+    // Set the error message based on the requirements not met
+    if (!hasMinimumLength) {
+      errorMessage.textContent = 'Password must have at least 6 characters.';
+    } else if (!hasUppercaseLetter) {
+      errorMessage.textContent = 'Password must have at least one uppercase letter.';
+    } else if (!hasLowercaseLetter) {
+      errorMessage.textContent = 'Password must have at least one lowercase letter.';
+    } else if (!isPasswordMatch) {
+      errorMessage.textContent = 'Passwords do not match.';
+    }
+  }
+}
+
+
+
+// function validatePasswordMobile() {
+//   var passwordInput = document.getElementById('passwordMobile');
+//   var confirmPasswordInput = document.getElementById('confirmPasswordMobile');
+//   var errorMessage = document.getElementById('error-messageMobile');
+
+//   // Check if the password meets the minimum requirements
+//   var password = passwordInput.value;
+//   var confirmPassword = confirmPasswordInput.value;
+//   var hasMinimumLength = password.length >= 8;
+//   var hasUppercaseLetter = /[A-Z]/.test(password);
+//   var hasLowercaseLetter = /[a-z]/.test(password);
+//   //var hasNumber = /\d/.test(password);
+//   // } else if (!hasNumber) {
+//     //   errorMessage.textContent = 'Password must have at least one number.';
+//   var hasSpecialCharacter = /[!@#$%^&*]/.test(password);
+
+//   if (password === confirmPassword && hasMinimumLength && hasUppercaseLetter && hasLowercaseLetter && hasNumber && hasSpecialCharacter) {
+//     errorMessage.style.display = 'none'; // Hide the error message
+//   } else {
+//     event.preventDefault();
+//     errorMessage.style.display = 'block'; // Show the error message
+
+//     // Set the error message based on the requirements not met
+//     if (password !== confirmPassword) {
+//       errorMessage.textContent = 'Passwords do not match.';
+//     } else if (!hasMinimumLength) {
+//       errorMessage.textContent = 'Password must have at least 8 characters.';
+//     } else if (!hasUppercaseLetter) {
+//       errorMessage.textContent = 'Password must have at least one uppercase letter.';
+//     } else if (!hasLowercaseLetter) {
+//       errorMessage.textContent = 'Password must have at least one lowercase letter.';
+    
+//     } else if (!hasSpecialCharacter) {
+//       errorMessage.textContent = 'Password must have at least one special character.';
+//     }
+//   }
+// }
+
+function validatePasswordMobile() {
+  var passwordInput = document.getElementById('passwordMobile');
+  var confirmPasswordInput = document.getElementById('confirmPasswordMobile');
+  var errorMessage = document.getElementById('error-messageMobile');
+
+  // Check if the password meets the minimum requirements
+  var password = passwordInput.value;
+  var confirmPassword = confirmPasswordInput.value;
+  var hasMinimumLength = password.length >= 6; // Relaxed to 6 characters
+  var hasUppercaseLetter = /[A-Z]/.test(password);
+  var hasLowercaseLetter = /[a-z]/.test(password);
+
+  if (password === confirmPassword && hasMinimumLength && hasUppercaseLetter && hasLowercaseLetter) {
+    errorMessage.style.display = 'none'; // Hide the error message
+  } else {
+    event.preventDefault();
+    errorMessage.style.display = 'block'; // Show the error message
+
+    // Set the error message based on the requirements not met
+    if (password !== confirmPassword) {
+      errorMessage.textContent = 'Passwords do not match.';
+    } else if (!hasMinimumLength) {
+      errorMessage.textContent = 'Password must have at least 6 characters.'; // Updated to 6
+    } else if (!hasUppercaseLetter) {
+      errorMessage.textContent = 'Password must have at least one uppercase letter.';
+    } else if (!hasLowercaseLetter) {
+      errorMessage.textContent = 'Password must have at least one lowercase letter.';
+    }
+  }
+}
+
+
+</script>

@@ -27,39 +27,40 @@ export function DisplayRegisterPage(req, res, next){
 }
 
 // Processing Function
-export function ProcessLoginPage(req, res, next){
-    passport.authenticate('local', function(err, user, info) {
-        if(err){
+export function processLoginPage(req, res, next) {
+    const admin = req.query.admin;
+
+    passport.authenticate('local', function (err, user, info) {
+        if (err) {
             console.error(err);
-            res.end(err);
-        }     
-        
-        if(!user){
-            req.flash('loginMessage', 'Authentication Error');
-            return res.redirect('/login');
+            return res.status(500).json({ message: `Server error: ${err.message}` });
         }
 
-        req.logIn(user, function(err){
-            if(err){
+        if (!user) {
+            return res.status(401).json({ message: 'Authentication Error' });
+        }
+
+        req.logIn(user, function (err) {
+            if (err) {
                 console.error(err);
-                res.end(err);
+                return res.status(500).json({ message: `Login error: ${err.message}` });
             }
 
-            return res.redirect('/');
+            return res.status(200).json({ message: 'Success', admin: admin === 'true' });
+        });
 
-        })
-        
     })(req, res, next);
 }
 
-export function ProcessRegisterPage(req, res, next){
+
+export function processRegisterPage(req, res, next){
     let newUser = new User({
         username: req.body.username,
-        emailAddress: req.body.emailAddress,
+        emailAddress: req.body.username,
         displayName: req.body.firstName + " " + req.body.lastName,
         userType: req.body.userType,
         firstName: req.body.firstName,
-        lastName: req.body.lastName
+        lastName: req.body.lastName,
     });
 
     User.register(newUser, req.body.password, function(err){
@@ -71,13 +72,21 @@ export function ProcessRegisterPage(req, res, next){
                 console.error(err.name);
                 req.flash('registerMessage', 'Server Error')
             }
+            if (req.query.admin === 'true') {
+                return res.redirect('/admin/admin-register');
+            } else {
+                return res.redirect('/register');
+            }
             
-            return res.redirect('/register');
         }
 
         return passport.authenticate('local')(req, res, function()
         {
-            return res.redirect('/');
+            if (req.query.admin === 'true') {
+                return res.redirect('/admin/dashboard');
+            } else {
+                return res.redirect('/');
+            }
         });
     });
 }
