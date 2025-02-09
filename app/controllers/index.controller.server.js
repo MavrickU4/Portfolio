@@ -16,21 +16,25 @@ export function displayAboutPage(req, res, next) {
 
 export function displayProjectsPage(req, res, next) {
     res.render('index', { title: 'Projects', page: 'projects', projects: Projects.find(), 
+        displayName: UserDisplayName(req), userID: UserID(req),
         mobile: mobileCheck(req), successMessage: req.flash('successMessage'), errorMessage: req.flash('errorMessage') } );
 };
 
 export function displayServicesPage(req, res, next) {
     res.render('index', { title: 'Services', page: 'services', 
+        displayName: UserDisplayName(req), userID: UserID(req),
         mobile: mobileCheck(req), successMessage: req.flash('successMessage'), errorMessage: req.flash('errorMessage') } );
 };
 
 export function displayEducationPage(req, res, next) {
     res.render('index', { title: 'Education', page: 'education', 
+        displayName: UserDisplayName(req), userID: UserID(req),
         mobile: mobileCheck(req), successMessage: req.flash('successMessage'), errorMessage: req.flash('errorMessage')} );
 };
 
 export function displayContactPage(req, res, next) {
     res.render('index', { title: 'Contact', page: 'contact', 
+        displayName: UserDisplayName(req), userID: UserID(req),
         mobile: mobileCheck(req), successMessage: req.flash('successMessage'), errorMessage: req.flash('errorMessage'),
     });
 };
