@@ -1,0 +1,404 @@
+<% if (mobile) { %> <% } else { %> <% } %>
+<main class="mx-auto max-w-7xl sm:px-6 sm:pt-16 lg:px-8">
+  <div class="mx-auto max-w-none">
+    <!-- project -->
+    <div class="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
+      <!-- Image gallery -->
+      <div class="flex flex-col-reverse">
+        <!-- Image selector -->
+        <div class="mx-auto mt-6 max-h-[400px] w-full max-w-4xl sm:block lg:max-w-none">
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-6" aria-orientation="horizontal" role="tablist">
+            <% if (project.imagePaths) { %> 
+            <% project.imagePaths.forEach(function(image, i) { %>
+                <!-- Your HTML code for rendering the image here -->
+                <button id="tabs-2-tab-1-<%= i %>" onclick="showImage('./../../../<%= project.imagePaths[i] %>');" class="font-custom <% if (mobile) { %> text-4xl <% } else { %> text-sm <% } %> relative flex h-48 w-48 shadow-md lg:h-24 lg:w-24 cursor-pointer items-center justify-center rounded-md bg-white font-medium uppercase text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring focus:ring-opacity-50 focus:ring-offset-4" aria-controls="tabs-2-panel-1" role="tab" type="button">
+                  <span class="sr-only">Angled view</span>
+                  <span class="absolute inset-0 overflow-hidden rounded-md">
+                    <img src="./../../../<%= project.imagePaths[i] %>" alt="" class="h-full w-full object-cover object-center">
+                  </span>
+                  <!-- Selected: "ring-indigo-500", Not Selected: "ring-transparent" -->
+                  <span class="ring-transparent pointer-events-none absolute inset-0 rounded-md ring-2 ring-offset-2" aria-hidden="true"></span>
+                </button>
+            <% }); %>
+            <% } %>
+          </div>
+        </div>
+
+        <div style="position: relative; width: 100%; height: 0; padding-bottom: 100%;">
+          <!-- Tab panel, show/hide based on tab state. -->
+          <div id="tabs-2-panel-1" aria-labelledby="tabs-2-tab-1" role="tabpanel" tabindex="0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+              <img id="main-image" src="<%= project.imgUrl %>" data-main-image="<%= project.imgUrl %>" alt="" style="object-fit: cover; object-position: center center; width: 100%; height: 100%; border-radius: 0.375rem;">
+          </div>
+          <!-- More images... -->
+      </div>
+      
+      </div>
+
+      <!-- project info -->
+      <!-- SUCCESS MESSAGE  -->
+<% if (successMessage && successMessage.length > 0) { %> 
+  <div id="success-added-cart-item-label-loggedin" class="fixed top-16 right-4 z-50">
+    <div class="rounded-md bg-green-100 p-4">
+      <div class="flex">
+        <div class="flex-shrink-0">
+          <svg class="<% if (mobile) { %> h-10 w-10 <% } else { %> h-5 w-5 <% } %> text-green-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <!-- Your SVG path here -->
+          </svg>
+        </div>
+        <div class="ml-3">
+          <p class="font-custom <% if (mobile) { %> text-4xl <% } else { %> text-sm <% } %> font-medium text-green-800">Successfully added item to your cart</p>
+        </div>
+        <div class="ml-auto pl-3">
+          <div class="-mx-1.5 -my-1.5">
+            <button type="button" onclick="document.getElementById('success-added-cart-item-label-loggedin').style.display = 'none';" class="inline-flex rounded-md bg-green-100 p-1.5 text-green-500 hover:bg-green-50 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2 focus:ring-offset-green-100">
+              <span class="sr-only">Dismiss</span>
+              <svg class="<% if (mobile) { %> h-10 w-10 <% } else { %> h-5 w-5 <% } %>" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>  
+  <% } %>
+
+  
+      <div class="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
+        <h1 class="font-custom text-5xl font-bold tracking-tight text-gray-900"><%= project.title %></h1>
+
+        <div class="mt-0">
+          <% if (project.url && project.url !== '') { %>
+          <p class="font-custom text-gray-400 relative <% if (mobile) { %> text-4xl <% } else { %> text-lg <% } %>"><a href="<%= project.url %>" target="_blank"><%= project.url %></a></p>
+         <% } %>
+          <p id="price-label" class="hidden text-4xl tracking-tight text-gray-900">$</p>
+        </div>
+
+        <!-- Reviews -->
+        <% // reviews.forEach(function(review) { %> 
+        <div class="mt-3 hidden">
+          <h3 class="font-custom sr-only <% if (mobile) { %> text-4xl <% } else { %> text-sm <% } %>">Reviews</h3>
+          <div class="flex items-center">
+            <div class="flex items-center">
+              <!-- Active: "text-indigo-500", Inactive: "text-gray-300" -->
+              <svg class="h-5 w-5 flex-shrink-0 text-indigo-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+              </svg>
+              <svg class="h-5 w-5 flex-shrink-0 text-indigo-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+              </svg>
+              <svg class="h-5 w-5 flex-shrink-0 text-indigo-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+              </svg>
+              <svg class="h-5 w-5 flex-shrink-0 text-indigo-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+              </svg>
+              <svg class="h-5 w-5 flex-shrink-0 text-gray-300" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+              </svg>
+            </div>
+            <p class="font-custom sr-only <% if (mobile) { %> text-4xl <% } else { %> text-sm <% } %>">4 out of 5 stars</p>
+          </div>
+        </div>
+        <% // }); %>
+
+        <div class="mt-6">
+          <h3 class="font-custom sr-only <% if (mobile) { %> text-4xl <% } else { %> text-sm <% } %>">Description</h3>
+          <div class="space-y-6 text-base text-gray-700">
+            <p class="font-custom text-gray-800 relative <% if (mobile) { %> text-4xl <% } else { %> text-sm <% } %> font-semibold">Description: <% if (project.description) { %><%- project.description %><% } else { %> No info. <% } %></p>
+
+          </div>
+        </div>
+
+
+
+<!-- VARIANT SELECTION -->
+<% if (displayName) { %>
+    <form id="add-to-cart-form" class="mt-6" method="post" action="/cart-add-item">    
+  <% } %>
+          <input id="projectId-input" type="hidden" name="projectId" value="<%= project._id %>">
+          <input id="projectName-input" type="hidden" name="projectName" value="<%= project.title %>">
+          <input id="projectImagePath-input" type="hidden" name="projectImagePath" value="<%= project.imgUrl %>">
+          <input id="projectPrice-input" type="hidden" name="projectPrice" value="<%= project.price %>" >
+          <input id="priceAddOns-input" type="hidden" name="priceAddOns" value="0">
+          <input id="projectCategory-input" type="hidden" name="projectCategory" value="<%= project.category %>">
+          <input id="notes-input" type="hidden" name="notes">
+          <input id="customImagesEditAreas-input" type="hidden" name="customImagesEditAreas" value='<%= JSON.stringify(project.customImagesEditAreas) %>'>
+          <input id="customImages-input" type="hidden" name="customImages" value='<%= JSON.stringify(project.customImages) %>'>
+          
+          <div class="<% if (mobile) { %> mt-12 <% } else { %> mt-6 <% } %>">
+          </div>
+  
+
+          <div class="<% if (mobile) { %> mt-16 <% } else { %> mt-10 gap-x-4 <% } %> flex ">
+            <button type="submit" id="add-item-to-cart-button" class=" font-custom flex max-w-xs flex-1 items-center justify-center rounded-md border-2 border-black px-8 py-3 font-custom <% if (mobile) { %> text-4xl <% } else { %> text-sm <% } %> font-medium hover:bg-gray-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full">View <%- project.classType %></button>
+        
+            
+      
+              <a id="checkout-button-guest" href="/cart" class="hidden font-custom flex max-w-xs flex-1 items-center justify-center rounded-md border-2 border-black px-8 py-3 font-custom <% if (mobile) { %> text-4xl ml-5 <% } else { %> text-sm <% } %> font-medium hover:bg-gray-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full">Checkout</a>
+          
+
+          </div>
+<!-- SUCCESS MESSAGE  -->
+          <div id="success-added-cart-item-label" class="hidden rounded-md bg-green-50 p-4">
+            <div class="flex">
+              <div class="flex-shrink-0">
+                <svg class="h-5 w-5 text-green-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                </svg>
+              </div>
+              <div class="ml-3">
+                <p class="font-custom <% if (mobile) { %> text-4xl <% } else { %> text-sm <% } %> font-medium text-green-800">Successfully added item to your cart</p>
+              </div>
+
+              <div class="ml-auto pl-3">
+                <div class="-mx-1.5 -my-1.5">
+                  <button type="button" onclick="document.getElementById('success-added-cart-item-label').style.display = 'none';" class="inline-flex rounded-md bg-green-50 p-1.5 text-green-500 hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2 focus:ring-offset-green-50">
+                    <span class="sr-only">Dismiss</span>
+                    <svg class="h-10 w-10 lg:h-5 lg:w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% if (displayName) { %>
+        </form>
+        <% } %>
+
+<!-- Shipping And Size Info -->
+        <section aria-labelledby="details-heading" class="mt-12">
+          <h2 id="details-heading" class="sr-only font-custom <% if (mobile) { %> text-4xl <% } else { %> text-sm <% } %>">Additional details</h2>
+          <div class="divide-y divide-gray-200 border-t">
+            <!-- Features Dropdown -->
+            <div>
+              <h3>
+                <!-- Expand/collapse question button -->
+                <button type="button" class="group relative flex w-full items-center justify-between py-6 text-left" aria-controls="disclosure-1" aria-expanded="false" onclick="toggleDropdown('disclosure-1','disclosure-1-closed', 'disclosure-1-open' )">
+                  <!-- Open: "text-indigo-600", Closed: "text-gray-900" -->
+                  <span class="font-custom text-gray-900 <% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> font-medium">Skills Required</span>
+                  <span class="ml-6 flex items-center">
+                    <!-- Open: "hidden", Closed: "block" -->
+                    <svg id="disclosure-1-closed" class="h-6 w-6 text-gray-400 group-hover:text-gray-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                    </svg>
+                    <!-- Open: "block", Closed: "hidden" -->
+                    <svg id="disclosure-1-open" class="hidden h-6 w-6 text-indigo-400 group-hover:text-indigo-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15" />
+                    </svg>
+                  </span>
+                </button>
+              </h3>
+              <div class="prose prose-sm pb-6" id="disclosure-1" style="display: none;">
+                <p class="font-custom <% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %>">
+                  <%= project.skills %>
+                </p>
+              </div>
+            </div>
+            
+<!-- Specifications Dropdown -->
+            <div>
+              <h3>
+                <!-- Expand/collapse question button -->
+                <button type="button" class="group relative flex w-full items-center justify-between py-6 text-left" aria-controls="disclosure-2" aria-expanded="false" onclick="toggleDropdown('disclosure-2','disclosure-2-closed', 'disclosure-2-open')">
+                  <!-- Open: "text-indigo-600", Closed: "text-gray-900" -->
+                  <span class="font-custom text-gray-900 <% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %>  font-medium">Project Status</span>
+                  <span class="ml-6 flex items-center">
+                    <!-- Open: "hidden", Closed: "block" -->
+                    <svg id="disclosure-2-closed" class="h-6 w-6 text-gray-400 group-hover:text-gray-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                    </svg>
+                    <!-- Open: "block", Closed: "hidden" -->
+                    <svg id="disclosure-2-open" class="hidden h-6 w-6 text-indigo-400 group-hover:text-indigo-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15" />
+                    </svg>
+                  </span>
+                </button>
+              </h3>
+              <div class="prose prose-sm pb-6" id="disclosure-2" style="display: none;">
+                <p class="font-custom <% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %>">
+                  <%= project.status %>
+                </p>
+              </div>
+            </div>
+            
+<!-- Features! -->
+           <div>
+            <h3>
+              <!-- Expand/collapse question button -->
+              <button type="button" class="group relative flex w-full items-center justify-between py-6 text-left" aria-controls="disclosure-3" aria-expanded="false" onclick="toggleDropdown('disclosure-3','disclosure-3-closed', 'disclosure-3-open')">
+                <!-- Open: "text-indigo-600", Closed: "text-gray-900" -->
+                <span class="font-custom text-gray-900 <% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %>  font-medium">Features</span>
+                <span class="ml-6 flex items-center">
+                  <!-- Open: "hidden", Closed: "block" -->
+                  <svg id="disclosure-3-closed" class=" h-6 w-6 text-gray-400 group-hover:text-gray-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                  </svg>
+                  <!-- Open: "block", Closed: "hidden" -->
+                  <svg id="disclosure-3-open" class="hidden h-6 w-6 text-indigo-400 group-hover:text-indigo-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15" />
+                  </svg>
+                </span>
+              </button>
+            </h3>
+            <div class="prose prose-sm pb-6" id="disclosure-3" style="display: none;">
+              <p class="font-custom <% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %>"> 
+                <%- project.features %>
+            </p>
+          </div>
+          </div>  
+
+<!-- Customer Guarantee! -->
+          <div class="hidden">
+            <h3>
+              <!-- Expand/collapse question button -->
+              <button type="button" class="group relative flex w-full items-center justify-between py-6 text-left" aria-controls="disclosure-4" aria-expanded="false" onclick="toggleDropdown('disclosure-4','disclosure-4-closed', 'disclosure-4-open')">
+                <!-- Open: "text-indigo-600", Closed: "text-gray-900" -->
+                <span class="font-custom text-gray-900 <% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %>  font-medium">Customer Guarantee & Warranty!</span>
+                <span class="ml-6 flex items-center">
+                  <!-- Open: "hidden", Closed: "block" -->
+                  <svg id="disclosure-4-closed" class="h-6 w-6 text-gray-400 group-hover:text-gray-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                  </svg>
+                  <!-- Open: "block", Closed: "hidden" -->
+                  <svg id="disclosure-4-open" class="hidden h-6 w-6 text-indigo-400 group-hover:text-indigo-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15" />
+                  </svg>
+                </span>
+              </button>
+            </h3>
+            <div class="prose prose-sm" id="disclosure-4" style="display: none;">
+              <p class="font-custom <% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %>"> We want you to be amazed with our projects! If you are not fully satisfied with your purchase, email us at admin@toolbeast.ca so we can make it right.
+            </p>
+          </div>
+          </div>         
+</div>
+          
+          <script>
+            function toggleDropdown(disclosureId, svgprojectClosedId, svgprojectOpenId) {
+              const disclosure = document.getElementById(disclosureId);
+              const svgprojectClosed = document.getElementById(svgprojectClosedId);
+              const svgprojectOpen = document.getElementById(svgprojectOpenId);
+              const isExpanded = disclosure.style.display === 'block' || disclosure.style.display === '';
+              disclosure.style.display = isExpanded ? 'none' : 'block';
+              if (!isExpanded) {
+                svgprojectClosed.classList.add('hidden');
+                svgprojectOpen.classList.remove('hidden');
+              } else {
+                svgprojectClosed.classList.remove('hidden');
+                svgprojectOpen.classList.add('hidden');
+              }
+            }
+          </script>
+
+   </section>  
+</div>
+</div>
+</div>
+
+
+    <section aria-labelledby="related-heading" class="mt-10 border-t border-gray-200 px-4 py-16 sm:px-0">
+      <h2 id="related-heading" class="font-custom <% if (mobile) { %> text-5xl <% } else { %> text-3xl <% } %> font-bold text-gray-900">View Other Projects</h2>
+
+      <div class="mt-8 grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
+        <% let projectCount = 0; %>
+        <% myProjects.forEach(function(myProject) { %> 
+          <% if (projectCount >= 4) { return; } %>
+          <% if (String(myProject._id) === String(project._id)) {
+            console.log('same project');
+          } else { %> 
+            <% projectCount++; %>
+        <div class="border rounded-lg border-gray-200 overflow-hidden">
+          <div class="relative">
+            <div class="relative h-72 w-full bg-[#E1D5D1] overflow-hidden hover:opacity-75">
+              <a href="/project/view/<%= myProject._id %>">
+              <img src="<%= myProject.imgUrl %>" alt="" class="h-full w-full object-cover object-center">
+              </a>
+            </div>
+
+          </div>
+          <div class="mt-2 text-center">
+            <p class="font-custom relative <% if (mobile) { %> text-3xl <% } else { %> text-lg <% } %> font-semibold"><%- myProject.title %></p>
+          </div>
+        </div>
+        <% } %>
+        <% }); %>
+        <!-- More projects... -->
+      </div>
+    </section>
+  </div>
+
+
+</main>
+
+<script>
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+  if (cart.length > 0 && '<% displayName %>') {
+    document.getElementById('checkout-btn').classList.remove('hidden');
+  }
+  if (cart.length > 0 && !'<% displayName %>') {
+    document.getElementById('checkout-button-guest').classList.remove('hidden');
+  }
+
+  // Get the main image element
+  const mainImage = document.getElementById("main-image");
+  function showImage(imagePathSelected){
+    mainImage.src = imagePathSelected;
+  }
+
+  document.getElementById('add-item-to-cart-button').addEventListener('click', function(){ 
+      processAddItemsToCart();
+  });
+
+function processAddItemsToCart() { 
+  cart = JSON.parse(localStorage.getItem('cart')) || [];
+  let projectPrice = 0;
+  let identifier = cart.length;
+  let quantity = 1;
+  let priceAddOns = 0;
+  const projectId = '<%= project._id %>';
+  let notes = '';
+    notes = null;
+
+  const projectToAdd = {
+    projectId: projectId,
+    projectName: '<%= project.title %>',
+    projectImagePath: '<%= project.imgUrl %>',
+    category: '<%= project.category %>',
+    projectPrice: '<%= project.price %>',
+    priceAddOns: priceAddOns,
+    identifier: identifier,
+    quantity: quantity,
+    customImages: `<%- project.customImages %>`,
+    notes: notes
+  };
+  cart.push(projectToAdd);
+  localStorage.setItem('cart', JSON.stringify(cart));
+
+  //For Form Submission: fill inputs
+  document.getElementById('projectId-input').value = '<%= project._id %>';
+  document.getElementById('projectName-input').value = '<%= project.title %>';
+  document.getElementById('projectImagePath-input').value = '<%= project.imgUrl %>';
+  document.getElementById('projectCategory-input').value = '<%= project.category %>';
+  document.getElementById('projectPrice-input').value = projectPrice;
+  document.getElementById('priceAddOns-input').value = priceAddOns;
+  document.getElementById('notes-input').value = notes;
+  document.getElementById('customImagesEditAreas-input').value = `<%- project.customImagesEditAreas %>`;
+  document.getElementById('customImages-input').value = `<%- project.customImages %>`;
+  
+  
+  
+  
+  document.getElementById('success-added-cart-item-label').style.display = 'block';
+  
+
+  setTimeout(() => {
+  window.location.reload();
+}, 500);
+
+}
+
+
+</script>

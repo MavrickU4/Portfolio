@@ -48,6 +48,35 @@ export function displayContactPage(req, res, next) {
     });
 };
 
+export async function displayProjectPage(req, res, next) {
+    try {
+        const myProjects = await MyProjects.find(); 
+        const { _id } = req.params;
+        const project = await MyProjects.findById(_id);
+        if (!project) {
+            return res.redirect('/404');
+        }
+        res.render('index', { title: 'Projects', page: 'project-view', project, 
+            admin: false,
+            displayName: UserDisplayName(req), userID: UserID(req),
+            myProjects: myProjects,
+            mobile: mobileCheck(req), successMessage: req.flash('successMessage'), errorMessage: req.flash('errorMessage') });
+    } catch (error) {
+        console.error(error);
+        res.redirect('/404');
+    }
+};
+
+export async function display404Page(req, res, next) {
+        res.render('index', { title: 'Projects', 
+            page: '404',
+            admin: false,
+            displayName: UserDisplayName(req), userID: UserID(req),
+            mobile: mobileCheck(req), 
+            successMessage: req.flash('successMessage'), 
+            errorMessage: req.flash('errorMessage') });
+};
+
 export async function processSendMessage(req, res) {
     const { firstName, lastName, email, phone, message } = req.body;
     const emailContent = `

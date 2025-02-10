@@ -20,15 +20,15 @@
 		</div>
 		<dl class="mt-16 grid grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 lg:grid-cols-4">
 		  <div class="flex flex-col-reverse">
-			<dt class="<% if (mobile) { %> text-3xl <% } else { %> text-base leading-7 <% } %>  text-gray-300">Completed Web-apps</dt>
-			<dd class="<% if (mobile) { %> text-4xl <% } else { %> text-2xl <% } %> font-bold leading-9 tracking-tight text-white">5</dd>
+			<dt class="<% if (mobile) { %> text-3xl <% } else { %> text-base leading-7 <% } %>  text-gray-300">Completed Projects</dt>
+			<dd class="<% if (mobile) { %> text-4xl <% } else { %> text-2xl <% } %> font-bold leading-9 tracking-tight text-white"><% if (myProjects && myProjects.length > 0) { %><%- myProjects.length %><% } %></dd>
 		  </div>
 		  <div class="flex flex-col-reverse">
 			<dt class="<% if (mobile) { %> text-3xl <% } else { %> text-base leading-7 <% } %>  text-gray-300">Mobile Apps</dt>
-			<dd class="<% if (mobile) { %> text-4xl <% } else { %> text-2xl <% } %> font-bold leading-9 tracking-tight text-white">3</dd>
+			<dd class="<% if (mobile) { %> text-4xl <% } else { %> text-2xl <% } %> font-bold leading-9 tracking-tight text-white">1</dd>
 		  </div>
 		  <div class="flex flex-col-reverse">
-			<dt class="<% if (mobile) { %> text-3xl <% } else { %> text-base leading-7 <% } %> text-gray-300">Hours per week</dt>
+			<dt class="<% if (mobile) { %> text-3xl <% } else { %> text-base leading-7 <% } %> text-gray-300">Available Hours per week</dt>
 			<dd class="<% if (mobile) { %> text-4xl <% } else { %> text-2xl <% } %> font-bold leading-9 tracking-tight text-white">80</dd>
 		  </div>
 		  <div class="flex flex-col-reverse">
@@ -48,14 +48,15 @@
 	  <div class="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:grid-cols-3 lg:gap-x-8">
 		<% if (myProjects && myProjects.length > 0) { %>
 			<% myProjects.forEach(function(project) { %>
-				<% console.log(project); %> 
 			<div class="group relative flex flex-col overflow-hidden rounded-lg rounded-lg border border-gray-200 bg-white">
 				<div class="aspect-h-3 aspect-w-2 bg-gray-200 sm:aspect-none group-hover:opacity-75">
+					<a href="/project/view/<%- project._id %>">
 				  <img src="<%- project.imgUrl %>" alt="Eight shirts arranged on table in black, olive, grey, blue, white, red, mustard, and green." class="h-full w-full object-cover object-center sm:h-full sm:w-full">
+					</a>
 				</div>
 				<div class="flex flex-1 flex-col space-y-2 p-4">
 				  <h3 class="<% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> font-medium text-gray-900">
-					<a href="<%- project.url %>">
+					<a href="/project/view/<%- project._id %>">
 					  <span aria-hidden="true" class="absolute inset-0"></span>
 					  <%- project.title %>
 					</a>

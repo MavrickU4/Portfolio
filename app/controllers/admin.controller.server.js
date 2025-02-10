@@ -1,6 +1,7 @@
 import Users from '../models/user.js';
 import { UserDisplayName, UserID, mobileCheck } from '../utils/index.js';
 import MyProjects from '../models/projects.js';
+import MyServices from '../models/services.js';
 
 //displays page to add new item to database
 export function displayAdminDashboardPage(req, res, next){
@@ -38,9 +39,34 @@ export async function displayAdminDatabaseMyProjectsPage(req, res, next) {
     }
 }
 
+export async function displayAdminDatabaseMyServicesPage(req, res, next) {
+    try {
+        const myServices = await MyServices.find(); 
+
+        res.render('content/admin/dashboard/index', { 
+            title: 'Admin My Services', 
+            page: 'my-services', 
+            admin: true,
+            myServices,
+            ad: {}, 
+            userID: UserID(req), 
+            displayName: UserDisplayName(req),
+            mobile: mobileCheck(req), 
+            successMessage: req.flash('successMessage'), 
+            errorMessage: req.flash('errorMessage'),
+            orders: [], 
+            ordersUnfulfilled: [],
+        });
+    } catch (error) {
+        console.error('Error retrieving projects:', error);
+        req.flash('errorMessage', 'Error loading projects.');
+        res.redirect('/admin');
+    }
+}
+
 
 export function processActionMyProject(req, res, next) {
-    const { id, title, description, skills, priority, status, url, imgUrl, edit, remove } = req.body;
+    const { id, title, description, skills, classType, priority, features, status, url, imgUrl, edit, remove } = req.body;
 if (remove) {
     // Delete the project
     MyProjects.findByIdAndDelete(id, (err, project) => {
@@ -63,6 +89,8 @@ if (!edit) {
         skills,
         status,
         priority,
+        classType,
+        features,
         url,
         imgUrl
     });
@@ -92,6 +120,8 @@ if (!edit) {
         project.status = status;
         project.priority = priority;
         project.url = url;
+        project.classType = classType;
+        project.features = features;
         project.imgUrl = imgUrl;
 
         // Save the updated project

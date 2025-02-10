@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 
-const projectSchema = new Schema({
+const serviceSchema = new Schema({
     title: String,
     description: String,
     skills: String,
@@ -14,7 +14,7 @@ const projectSchema = new Schema({
     features: String,
 }, {
     timestamps: true,
-    collection: 'projects'
+    collection: 'services'
 });
 
-export default mongoose.model('Projects', projectSchema);
+export default mongoose.model('Services', serviceSchema);

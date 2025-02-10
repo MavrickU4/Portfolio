@@ -5,7 +5,8 @@ import { displayAboutPage,
     displayProjectsPage, 
     displayServicesPage, 
     displayEducationPage,
-    displayContactPage,
+    displayContactPage,display404Page,
+    displayProjectPage,
     processSendMessage } from "../controllers/index.controller.server.js";
 
 const router = Router();
@@ -18,6 +19,9 @@ router.get('/projects', displayProjectsPage);
 router.get('/services', displayServicesPage);
 router.get('/education', displayEducationPage);
 router.get('/contact', displayContactPage);
+router.get('/404', display404Page);
+
+router.get('/project/view/:_id', displayProjectPage);
 
 router.post('/send-message', processSendMessage);
 
