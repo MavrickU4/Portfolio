@@ -1,6 +1,6 @@
 import Users from '../models/user.js';
 import { UserDisplayName, UserID, mobileCheck } from '../utils/index.js';
-import Projects from '../models/projects.js';
+import MyProjects from '../models/projects.js';
 
 //displays page to add new item to database
 export function displayAdminDashboardPage(req, res, next){
@@ -13,44 +13,53 @@ orders: [], ordersUnfulfilled: [],
 });
 }
 
-export function displayAdminDatabaseMyProjectsPage(req, res, next){
-    res.render('content/admin/dashboard/index',  { 
-title: 'Admin My Projects', 
-page: 'my-projects', 
-admin: true,
-ad: {}, 
-userID: UserID(req), 
-displayName: UserDisplayName(req),
-mobile: mobileCheck(req), 
-successMessage: req.flash('successMessage'), 
-errorMessage: req.flash('errorMessage'),
-orders: [], 
-ordersUnfulfilled: [],
-});
+export async function displayAdminDatabaseMyProjectsPage(req, res, next) {
+    try {
+        const myProjects = await MyProjects.find(); 
+
+        res.render('content/admin/dashboard/index', { 
+            title: 'Admin My Projects', 
+            page: 'my-projects', 
+            admin: true,
+            myProjects,
+            ad: {}, 
+            userID: UserID(req), 
+            displayName: UserDisplayName(req),
+            mobile: mobileCheck(req), 
+            successMessage: req.flash('successMessage'), 
+            errorMessage: req.flash('errorMessage'),
+            orders: [], 
+            ordersUnfulfilled: [],
+        });
+    } catch (error) {
+        console.error('Error retrieving projects:', error);
+        req.flash('errorMessage', 'Error loading projects.');
+        res.redirect('/admin');
+    }
 }
 
 
-export function processAddMyProject(req, res, next){
-    const newProject = new Users({
-        "username": req.body.username,
-        "password": req.body.password,
-        "email": req.body.email,
-        "displayName": req.body.displayName,
-        "created": Date.now(),
-        "updated": Date.now()
+export function processAddMyProject(req, res, next) {
+    const { title, description, skills, priority, url, imgUrl } = req.body;
+
+    // Create a new project instance
+    const newProject = new Projects({
+        title,
+        description,
+        skills,
+        priority,
+        url,
+        imgUrl
     });
 
-    Projects.register(newProject, req.body.password, (err) => {
-        if(err){
-            console.log('Error inserting new project');
-            if(err.name == "UserExistsError"){
-                req.flash('errorMessage', 'Registration Error: User Already Exists!');
-                console.log('Error: User Already Exists');
-            }
-            return res.redirect('/admin/database/my-projects');
+    // Save to the database
+    newProject.save((err, project) => {
+        if (err) {
+            console.error('Error inserting new project:', err);
+            return res.status(500).json({ success: false, message: 'Error adding project', error: err });
         }
-        console.log('New Project Added');
-        req.flash('successMessage', 'New Project Added');
-        return res.redirect('/admin/database/my-projects');
+
+        console.log('New Project Added:', project);
+        return res.status(201).json({ success: true, message: 'Project added successfully', project });
     });
 }
