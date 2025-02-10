@@ -35,8 +35,9 @@ router.get('/auth/google', (req, res) => {
     const scope = 'https://mail.google.com/';
     const accessType = 'offline';
   
-    const authUrl = `https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&access_type=${accessType}`;
-  console.log('authURL:', authUrl);
+    // const authUrl = `https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&access_type=${accessType}`;
+    const authUrl = `https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${scope}&access_type=offline&prompt=consent`;
+    console.log('authURL:', authUrl);
     // Redirect the user to Google's OAuth consent screen
     res.redirect(authUrl);
   });
@@ -70,19 +71,17 @@ router.get('/oauth2callback', async (req, res) => {
         grant_type: 'authorization_code'
       });
   
-      const { access_token, refresh_token } = response.data;
-      // console.log('Access Token:', access_token);
-      console.log('Refresh Token:', refresh_token);
-      // const settings = [ "Google", refreshToken: refresh_token, accessToken: access_token];
-      // Settings = settings.push();
-      // Settings.save();
+      console.log('Full Token Response:', response.data); // Debugging step
   
-      // Store these tokens securely for future use (e.g., in a database or secure file)
+      const { access_token, refresh_token } = response.data;
+      console.log('Refresh Token:', refresh_token); // Should not be undefined
+  
       return { access_token, refresh_token };
     } catch (error) {
-      console.error('Error exchanging code for tokens:', error.message);
+      console.error('Error exchanging code for tokens:', error.response?.data || error.message);
       throw error;
     }
   }
+  
 
 export default router;

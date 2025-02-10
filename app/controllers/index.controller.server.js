@@ -39,16 +39,42 @@ export function displayContactPage(req, res, next) {
     });
 };
 
-export function processSendMessage(req, res) {
+export async function processSendMessage(req, res) {
     const { firstName, lastName, email, phone, message } = req.body;
-    const emailContent = `Name: ${firstName} ${lastName}\n
-Email: ${email}\n
-Phone: ${phone}\n
-Subject: New Portfolio Message\n
-Message: ${message}`;
+    const emailContent = `
+<div style="font-family: Arial, sans-serif; color: #333; max-width: 600px; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
+<h2 style="color: #007bff;">New Portfolio Message</h2>
+<p><strong>Name:</strong> ${firstName} ${lastName}</p>
+<p><strong>Email:</strong> <a href="mailto:${email}" style="color: #007bff;">${email}</a></p>
+<p><strong>Phone:</strong> ${phone}</p>
+<hr style="border: none; border-top: 1px solid #ddd; margin: 15px 0;">
+<p style="font-size: 16px;"><strong>Message:</strong></p>
+<p style="background: #f9f9f9; padding: 15px; border-radius: 5px;">${message}</p>
+</div>
+  `;
+  
 
-sendEmailIn(`New Contact Message`, emailContent);
+const emailSent = await sendEmailIn(`New Contact Message`, emailContent);
 
-    req.flash('successMessage', "Your message has been succesfully recieved! I am quick to reply, but if it's late, expect a contact first thing tomorrow morning. Thank you!");
-    res.redirect('/contact');
-  }
+const now = new Date();
+const todaytime = now.getHours() * 100 + now.getMinutes(); // Converts time to 24-hour format (e.g., 1830 for 6:30 PM)
+
+if (emailSent.success) {
+    if (todaytime > 1800) {
+        req.flash(
+            'successMessage',
+            "Message received! However, it's a bit late, please expect a response first thing tomorrow morning. Thank you!"
+        );
+    } else {
+        req.flash(
+            'successMessage',
+            "Message received! Since it's still early, I should be able to reply soon. Thank you!"
+        );
+    }
+} else {
+    req.flash('errorMessage', "Oops! Something went wrong, and your message couldn't be sent. Please try again later.");
+}
+
+res.redirect('/contact');
+
+}
