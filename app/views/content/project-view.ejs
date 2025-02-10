@@ -131,13 +131,8 @@
   
 
           <div class="<% if (mobile) { %> mt-16 <% } else { %> mt-10 gap-x-4 <% } %> flex ">
-            <button type="submit" id="add-item-to-cart-button" class=" font-custom flex max-w-xs flex-1 items-center justify-center rounded-md border-2 border-black px-8 py-3 font-custom <% if (mobile) { %> text-4xl <% } else { %> text-sm <% } %> font-medium hover:bg-gray-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full">View <%- project.classType %></button>
-        
-            
-      
-              <a id="checkout-button-guest" href="/cart" class="hidden font-custom flex max-w-xs flex-1 items-center justify-center rounded-md border-2 border-black px-8 py-3 font-custom <% if (mobile) { %> text-4xl ml-5 <% } else { %> text-sm <% } %> font-medium hover:bg-gray-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full">Checkout</a>
-          
-
+            <a href="<%- project.url %>" class=" font-custom flex max-w-xs flex-1 items-center justify-center rounded-md border-2 border-black px-8 py-3 font-custom <% if (mobile) { %> text-4xl <% } else { %> text-sm <% } %> font-medium hover:bg-gray-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full">View <%- project.classType %></a>
+  
           </div>
 <!-- SUCCESS MESSAGE  -->
           <div id="success-added-cart-item-label" class="hidden rounded-md bg-green-50 p-4">
@@ -347,10 +342,6 @@
   function showImage(imagePathSelected){
     mainImage.src = imagePathSelected;
   }
-
-  document.getElementById('add-item-to-cart-button').addEventListener('click', function(){ 
-      processAddItemsToCart();
-  });
 
 function processAddItemsToCart() { 
   cart = JSON.parse(localStorage.getItem('cart')) || [];
