@@ -4,36 +4,44 @@ import { sendEmailIn } from "../utils/emailService.js";
 import Projects from "../models/projects.js";
 
 export function displayHomePage(req, res, next) {
-    res.render('index', { title: 'Home', page: 'home', userID: UserID(req), displayName: UserDisplayName(req), 
+    res.render('index', { title: 'Home', page: 'home', 
+        admin: false,
+        userID: UserID(req), displayName: UserDisplayName(req), 
         successMessage: req.flash('successMessage'), errorMessage: req.flash('errorMessage'),
         mobile: mobileCheck(req),  } );
 };
 
 export function displayAboutPage(req, res, next) {
-    res.render('index', { title: 'About', page: 'about', userID: UserID(req), displayName: UserDisplayName(req), 
+    res.render('index', { title: 'About', page: 'about', userID: UserID(req), 
+        admin: false,
+        displayName: UserDisplayName(req), 
         mobile: mobileCheck(req), successMessage: req.flash('successMessage'), errorMessage: req.flash('errorMessage')} );
 };
 
 export function displayProjectsPage(req, res, next) {
     res.render('index', { title: 'Projects', page: 'projects', projects: Projects.find(), 
+        admin: false,
         displayName: UserDisplayName(req), userID: UserID(req),
         mobile: mobileCheck(req), successMessage: req.flash('successMessage'), errorMessage: req.flash('errorMessage') } );
 };
 
 export function displayServicesPage(req, res, next) {
     res.render('index', { title: 'Services', page: 'services', 
+        admin: false,
         displayName: UserDisplayName(req), userID: UserID(req),
         mobile: mobileCheck(req), successMessage: req.flash('successMessage'), errorMessage: req.flash('errorMessage') } );
 };
 
 export function displayEducationPage(req, res, next) {
     res.render('index', { title: 'Education', page: 'education', 
+        admin: false,
         displayName: UserDisplayName(req), userID: UserID(req),
         mobile: mobileCheck(req), successMessage: req.flash('successMessage'), errorMessage: req.flash('errorMessage')} );
 };
 
 export function displayContactPage(req, res, next) {
     res.render('index', { title: 'Contact', page: 'contact', 
+        admin: false,
         displayName: UserDisplayName(req), userID: UserID(req),
         mobile: mobileCheck(req), successMessage: req.flash('successMessage'), errorMessage: req.flash('errorMessage'),
     });

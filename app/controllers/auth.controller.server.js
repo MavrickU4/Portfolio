@@ -8,6 +8,7 @@ export function displayLoginPage(req, res, next){
     const admin = req.query.admin;
     if(!req.user){
         return res.render('index', {title: 'Login', page: admin === 'true' ? '/admin/admin-login' : 'login', 
+            admin: false,
             successMessage: req.flash('successMessage'),  errorMessage: req.flash('errorMessage'), 
             displayName: UserDisplayName(req), mobile: mobileCheck(req) });
     }
@@ -21,6 +22,7 @@ export function displayLoginPage(req, res, next){
 export function DisplayRegisterPage(req, res, next){
     if(!req.user){
         return res.render('index', {title: 'Register', page: 'register', 
+            admin: false,
             successMessage: req.flash('successMessage'),  errorMessage: req.flash('errorMessage'), 
             messages: req.flash('registerMessage'), displayName: UserDisplayName(req),
             mobile: mobileCheck(req),

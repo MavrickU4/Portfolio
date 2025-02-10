@@ -1,0 +1,732 @@
+<div class="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-[96rem] mx-auto">
+
+    <!-- Dashboard actions -->
+    <div class="sm:flex sm:justify-between sm:items-center mb-8">
+
+        <!-- Left: Title -->
+        <div class="mb-4 sm:mb-0">
+            <h1 class="text-2xl md:text-3xl text-gray-800 dark:text-gray-100 font-bold">Dashboard</h1>
+        </div>
+
+        <!-- Right: Actions -->
+        <div class="grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2">
+
+            <!-- Filter button -->
+            <div class="relative inline-flex" x-data="{ open: false }">
+                <button class="btn px-2.5 bg-white dark:bg-gray-800 border-gray-200 hover:border-gray-300 dark:border-gray-700/60 dark:hover:border-gray-600 text-gray-400 dark:text-gray-500" aria-haspopup="true" @click.prevent="open = !open" :aria-expanded="open">
+                    <span class="sr-only">Filter</span><wbr>
+                    <svg class="fill-current" width="16" height="16" viewBox="0 0 16 16">
+                        <path d="M0 3a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H1a1 1 0 0 1-1-1ZM3 8a1 1 0 0 1 1-1h8a1 1 0 1 1 0 2H4a1 1 0 0 1-1-1ZM7 12a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2H7Z" />
+                    </svg>
+                </button>
+                <div class="origin-top-right z-10 absolute top-full left-0 right-auto md:left-auto md:right-0 min-w-56 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700/60 pt-1.5 rounded-lg shadow-lg overflow-hidden mt-1" @click.outside="open = false" @keydown.escape.window="open = false" x-show="open" x-transition:enter="transition ease-out duration-200 transform" x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-out duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" x-cloak>
+                    <div class="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase pt-1.5 pb-2 px-3">Filters</div>
+                    <ul class="mb-4">
+                        <li class="py-1 px-3">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox" checked />
+                                <span class="text-sm font-medium ml-2">Direct VS Indirect</span>
+                            </label>
+                        </li>
+                        <li class="py-1 px-3">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox" checked />
+                                <span class="text-sm font-medium ml-2">Real Time Value</span>
+                            </label>
+                        </li>
+                        <li class="py-1 px-3">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox" checked />
+                                <span class="text-sm font-medium ml-2">Top Channels</span>
+                            </label>
+                        </li>
+                        <li class="py-1 px-3">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox" />
+                                <span class="text-sm font-medium ml-2">Sales VS Refunds</span>
+                            </label>
+                        </li>
+                        <li class="py-1 px-3">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox" />
+                                <span class="text-sm font-medium ml-2">Last Order</span>
+                            </label>
+                        </li>
+                        <li class="py-1 px-3">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox" />
+                                <span class="text-sm font-medium ml-2">Total Spent</span>
+                            </label>
+                        </li>
+                    </ul>
+                    <div class="py-2 px-3 border-t border-gray-200 dark:border-gray-700/60 bg-gray-50 dark:bg-gray-700/20">
+                        <ul class="flex items-center justify-between">
+                            <li>
+                                <button class="btn-xs bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700/60 hover:border-gray-300 dark:hover:border-gray-600 text-red-500">Clear</button>
+                            </li>
+                            <li>
+                                <button class="btn-xs bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700/60 hover:border-gray-300 dark:hover:border-gray-600 text-gray-800 dark:text-gray-300" @click="open = false" @focusout="open = false">Apply</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Datepicker built with flatpickr -->
+            <div class="relative">
+                <input class="datepicker form-input pl-9 dark:bg-gray-800 text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-gray-100 font-medium w-[15.5rem]" placeholder="Select dates" data-class="flatpickr-right" />
+                <div class="absolute inset-0 right-auto flex items-center pointer-events-none">
+                    <svg class="fill-current text-gray-400 dark:text-gray-500 ml-3" width="16" height="16" viewBox="0 0 16 16">
+                        <path d="M5 4a1 1 0 0 0 0 2h6a1 1 0 1 0 0-2H5Z" />
+                        <path d="M4 0a4 4 0 0 0-4 4v8a4 4 0 0 0 4 4h8a4 4 0 0 0 4-4V4a4 4 0 0 0-4-4H4ZM2 4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4Z" />
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Add view button -->
+            <button class="btn bg-gray-900 text-gray-100 hover:bg-gray-800 dark:bg-gray-100 dark:text-gray-800 dark:hover:bg-white">
+                <svg class="fill-current shrink-0 xs:hidden" width="16" height="16" viewBox="0 0 16 16">
+                    <path d="M15 7H9V1c0-.6-.4-1-1-1S7 .4 7 1v6H1c-.6 0-1 .4-1 1s.4 1 1 1h6v6c0 .6.4 1 1 1s1-.4 1-1V9h6c.6 0 1-.4 1-1s-.4-1-1-1z" />
+                </svg>
+                <span class="max-xs:sr-only">Add View</span>
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- Cards -->
+    <div class="grid grid-cols-12 gap-6">
+
+        <!-- Line chart (Acme Plus) -->
+        <div class="flex flex-col col-span-full sm:col-span-6 xl:col-span-4 bg-white dark:bg-gray-800 shadow-xs rounded-xl">
+            <div class="px-5 pt-5">
+                <header class="flex justify-between items-start mb-2">
+                    <h2 class="text-lg font-semibold text-gray-800 dark:text-gray-100">Acme Plus</h2>
+                    <!-- Menu button -->
+                    <div class="relative inline-flex" x-data="{ open: false }">
+                        <button class="rounded-full" :class="open ? 'bg-gray-100 dark:bg-gray-700/60 text-gray-500 dark:text-gray-400': 'text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400'" aria-haspopup="true" @click.prevent="open = !open" :aria-expanded="open">
+                            <span class="sr-only">Menu</span>
+                            <svg class="w-8 h-8 fill-current" viewBox="0 0 32 32">
+                                <circle cx="16" cy="16" r="2" />
+                                <circle cx="10" cy="16" r="2" />
+                                <circle cx="22" cy="16" r="2" />
+                            </svg>
+                        </button>
+                        <div class="origin-top-right z-10 absolute top-full right-0 min-w-36 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700/60 py-1.5 rounded-lg shadow-lg overflow-hidden mt-1" @click.outside="open = false" @keydown.escape.window="open = false" x-show="open" x-transition:enter="transition ease-out duration-200 transform" x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-out duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" x-cloak>
+                            <ul>
+                                <li>
+                                    <a class="font-medium text-sm text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-200 flex py-1 px-3" href="#0" @click="open = false" @focus="open = true" @focusout="open = false">Option 1</a>
+                                </li>
+                                <li>
+                                    <a class="font-medium text-sm text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-200 flex py-1 px-3" href="#0" @click="open = false" @focus="open = true" @focusout="open = false">Option 2</a>
+                                </li>
+                                <li>
+                                    <a class="font-medium text-sm text-red-500 hover:text-red-600 flex py-1 px-3" href="#0" @click="open = false" @focus="open = true" @focusout="open = false">Remove</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </header>
+                <div class="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase mb-1">Sales</div>
+                <div class="flex items-start">
+                    <div class="text-3xl font-bold text-gray-800 dark:text-gray-100 mr-2">$24,780</div>
+                    <div class="text-sm font-medium text-green-700 px-1.5 bg-green-500/20 rounded-full">+49%</div>
+                </div>
+            </div>
+            <!-- Chart built with Chart.js 3 -->
+            <!-- Check out src/js/dashboard-charts.js for config -->
+            <div class="grow max-sm:max-h-[128px] xl:max-h-[128px]">
+                <!-- Change the height attribute to adjust the chart height -->
+                <canvas id="dashboard-card-01" width="389" height="128"></canvas>
+            </div>
+        </div>
+
+        <!-- Line chart (Acme Advanced) -->
+        <div class="flex flex-col col-span-full sm:col-span-6 xl:col-span-4 bg-white dark:bg-gray-800 shadow-xs rounded-xl">
+            <div class="px-5 pt-5">
+                <header class="flex justify-between items-start mb-2">
+                    <h2 class="text-lg font-semibold text-gray-800 dark:text-gray-100">Acme Advanced</h2>
+                    <!-- Menu button -->
+                    <div class="relative inline-flex" x-data="{ open: false }">
+                        <button class="rounded-full" :class="open ? 'bg-gray-100 dark:bg-gray-700/60 text-gray-500 dark:text-gray-400': 'text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400'" aria-haspopup="true" @click.prevent="open = !open" :aria-expanded="open">
+                            <span class="sr-only">Menu</span>
+                            <svg class="w-8 h-8 fill-current" viewBox="0 0 32 32">
+                                <circle cx="16" cy="16" r="2" />
+                                <circle cx="10" cy="16" r="2" />
+                                <circle cx="22" cy="16" r="2" />
+                            </svg>
+                        </button>
+                        <div class="origin-top-right z-10 absolute top-full right-0 min-w-36 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700/60 py-1.5 rounded-lg shadow-lg overflow-hidden mt-1" @click.outside="open = false" @keydown.escape.window="open = false" x-show="open" x-transition:enter="transition ease-out duration-200 transform" x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-out duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" x-cloak>
+                            <ul>
+                                <li>
+                                    <a class="font-medium text-sm text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-200 flex py-1 px-3" href="#0" @click="open = false" @focus="open = true" @focusout="open = false">Option 1</a>
+                                </li>
+                                <li>
+                                    <a class="font-medium text-sm text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-200 flex py-1 px-3" href="#0" @click="open = false" @focus="open = true" @focusout="open = false">Option 2</a>
+                                </li>
+                                <li>
+                                    <a class="font-medium text-sm text-red-500 hover:text-red-600 flex py-1 px-3" href="#0" @click="open = false" @focus="open = true" @focusout="open = false">Remove</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </header>
+                <div class="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase mb-1">Sales</div>
+                <div class="flex items-start">
+                    <div class="text-3xl font-bold text-gray-800 dark:text-gray-100 mr-2">$17,489</div>
+                    <div class="text-sm font-medium text-red-700 px-1.5 bg-red-500/20 rounded-full">-14%</div>
+                </div>
+            </div>
+            <!-- Chart built with Chart.js 3 -->
+            <!-- Check out src/js/dashboard-charts.js for config -->
+            <div class="grow max-sm:max-h-[128px] xl:max-h-[128px]">
+                <!-- Change the height attribute to adjust the chart height -->
+                <canvas id="dashboard-card-02" width="389" height="128"></canvas>
+            </div>
+        </div>
+        
+        <!-- Line chart (Acme Professional) -->
+        <div class="flex flex-col col-span-full sm:col-span-6 xl:col-span-4 bg-white dark:bg-gray-800 shadow-xs rounded-xl">
+            <div class="px-5 pt-5">
+                <header class="flex justify-between items-start mb-2">
+                    <h2 class="text-lg font-semibold text-gray-800 dark:text-gray-100">Acme Professional</h2>
+                    <!-- Menu button -->
+                    <div class="relative inline-flex" x-data="{ open: false }">
+                        <button class="rounded-full" :class="open ? 'bg-gray-100 dark:bg-gray-700/60 text-gray-500 dark:text-gray-400': 'text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400'" aria-haspopup="true" @click.prevent="open = !open" :aria-expanded="open">
+                            <span class="sr-only">Menu</span>
+                            <svg class="w-8 h-8 fill-current" viewBox="0 0 32 32">
+                                <circle cx="16" cy="16" r="2" />
+                                <circle cx="10" cy="16" r="2" />
+                                <circle cx="22" cy="16" r="2" />
+                            </svg>
+                        </button>
+                        <div class="origin-top-right z-10 absolute top-full right-0 min-w-36 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700/60 py-1.5 rounded-lg shadow-lg overflow-hidden mt-1" @click.outside="open = false" @keydown.escape.window="open = false" x-show="open" x-transition:enter="transition ease-out duration-200 transform" x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-out duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" x-cloak>
+                            <ul>
+                                <li>
+                                    <a class="font-medium text-sm text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-200 flex py-1 px-3" href="#0" @click="open = false" @focus="open = true" @focusout="open = false">Option 1</a>
+                                </li>
+                                <li>
+                                    <a class="font-medium text-sm text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-200 flex py-1 px-3" href="#0" @click="open = false" @focus="open = true" @focusout="open = false">Option 2</a>
+                                </li>
+                                <li>
+                                    <a class="font-medium text-sm text-red-500 hover:text-red-600 flex py-1 px-3" href="#0" @click="open = false" @focus="open = true" @focusout="open = false">Remove</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </header>
+                <div class="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase mb-1">Sales</div>
+                <div class="flex items-start">
+                    <div class="text-3xl font-bold text-gray-800 dark:text-gray-100 mr-2">$9,962</div>
+                    <div class="text-sm font-medium text-green-700 px-1.5 bg-green-500/20 rounded-full">+29%</div>
+                </div>
+            </div>
+            <!-- Chart built with Chart.js 3 -->
+            <!-- Check out src/js/dashboard-charts.js for config -->
+            <div class="grow max-sm:max-h-[128px] xl:max-h-[128px]">
+                <!-- Change the height attribute to adjust the chart height -->
+                <canvas id="dashboard-card-03" width="389" height="128"></canvas>
+            </div>
+        </div>
+        
+        <!-- Bar chart (Direct vs Indirect) -->
+        <div class="flex flex-col col-span-full sm:col-span-6 bg-white dark:bg-gray-800 shadow-xs rounded-xl">
+            <header class="px-5 py-4 border-b border-gray-100 dark:border-gray-700/60">
+                <h2 class="font-semibold text-gray-800 dark:text-gray-100">Direct VS Indirect</h2>
+            </header>
+            <!-- Chart built with Chart.js 3 -->
+            <!-- Check out src/js/dashboard-charts.js for config -->
+            <div id="dashboard-card-04-legend" class="px-5 py-3">
+                <ul class="flex flex-wrap gap-x-4"></ul>
+            </div>
+            <div class="grow">
+                <!-- Change the height attribute to adjust the chart height -->
+                <canvas id="dashboard-card-04" width="595" height="248"></canvas>
+            </div>
+        </div>
+        
+        <!-- Line chart (Real Time Value) -->
+        <div class="flex flex-col col-span-full sm:col-span-6 bg-white dark:bg-gray-800 shadow-xs rounded-xl">
+            <header class="px-5 py-4 border-b border-gray-100 dark:border-gray-700/60 flex items-center">
+                <h2 class="font-semibold text-gray-800 dark:text-gray-100">Real Time Value</h2>
+                <div class="relative ml-2" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
+                    <button class="block" aria-haspopup="true" :aria-expanded="open" @focus="open = true" @focusout="open = false" @click.prevent>
+                        <svg class="fill-current text-gray-400 dark:text-gray-500" width="16" height="16" viewBox="0 0 16 16">
+                            <path d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm0 12c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1zm1-3H7V4h2v5z" />
+                        </svg>
+                    </button>
+                    <div class="z-10 absolute bottom-full left-1/2 -translate-x-1/2">
+                        <div class="bg-white dark:bg-gray-800 dark:text-gray-100 border border-gray-200 dark:border-gray-700/60 px-3 py-2 rounded-lg shadow-lg overflow-hidden mb-2" x-show="open" x-transition:enter="transition ease-out duration-200 transform" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-out duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" x-cloak>
+                            <div class="text-xs text-center whitespace-nowrap">Built with <a class="underline" @focus="open = true" @focusout="open = false" href="https://www.chartjs.org/" target="_blank">Chart.js</a></div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!-- Chart built with Chart.js 3 -->
+            <!-- Check out src/js/dashboard-charts.js for config -->
+            <div class="px-5 py-3">
+                <div class="flex items-start">
+                    <div class="text-3xl font-bold text-gray-800 dark:text-gray-100 mr-2 tabular-nums">$<span id="dashboard-card-05-value">57.81</span></div>
+                    <div id="dashboard-card-05-deviation" class="text-sm font-medium px-1.5 rounded-full"></div>
+                </div>
+            </div>
+            <div class="grow">
+                <!-- Change the height attribute to adjust the chart height -->
+                <canvas id="dashboard-card-05" width="595" height="248"></canvas>
+            </div>
+        </div>
+        
+        <!-- Doughnut chart (Top Countries) -->
+        <div class="flex flex-col col-span-full sm:col-span-6 xl:col-span-4 bg-white dark:bg-gray-800 shadow-xs rounded-xl">
+            <header class="px-5 py-4 border-b border-gray-100 dark:border-gray-700/60">
+                <h2 class="font-semibold text-gray-800 dark:text-gray-100">Top Countries</h2>
+            </header>
+            <!-- Chart built with Chart.js 3 -->
+            <!-- Check out src/js/dashboard-charts.js for config -->
+            <div class="grow flex flex-col justify-center">
+                <div>
+                    <!-- Change the height attribute to adjust the chart height -->
+                    <canvas id="dashboard-card-06" width="389" height="260"></canvas>
+                </div>
+                <div id="dashboard-card-06-legend" class="px-5 pt-2 pb-6">
+                    <ul class="flex flex-wrap justify-center -m-1"></ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Table (Top Channels) -->
+        <div class="col-span-full xl:col-span-8 bg-white dark:bg-gray-800 shadow-xs rounded-xl">
+            <header class="px-5 py-4 border-b border-gray-100 dark:border-gray-700/60">
+                <h2 class="font-semibold text-gray-800 dark:text-gray-100">Top Channels</h2>
+            </header>
+            <div class="p-3">
+
+                <!-- Table -->
+                <div class="overflow-x-auto">
+                    <table class="table-auto w-full dark:text-gray-300">
+                        <!-- Table header -->
+                        <thead class="text-xs uppercase text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-700/50 rounded-xs">
+                            <tr>
+                                <th class="p-2">
+                                    <div class="font-semibold text-left">Source</div>
+                                </th>
+                                <th class="p-2">
+                                    <div class="font-semibold text-center">Visitors</div>
+                                </th>
+                                <th class="p-2">
+                                    <div class="font-semibold text-center">Revenues</div>
+                                </th>
+                                <th class="p-2">
+                                    <div class="font-semibold text-center">Sales</div>
+                                </th>
+                                <th class="p-2">
+                                    <div class="font-semibold text-center">Conversion</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <!-- Table body -->
+                        <tbody class="text-sm font-medium divide-y divide-gray-100 dark:divide-gray-700/60">
+                            <!-- Row -->
+                            <tr>
+                                <td class="p-2">
+                                    <div class="flex items-center">
+                                        <svg class="shrink-0 mr-2 sm:mr-3" width="36" height="36" viewBox="0 0 36 36">
+                                            <circle fill="#24292E" cx="18" cy="18" r="18" />
+                                            <path d="M18 10.2c-4.4 0-8 3.6-8 8 0 3.5 2.3 6.5 5.5 7.6.4.1.5-.2.5-.4V24c-2.2.5-2.7-1-2.7-1-.4-.9-.9-1.2-.9-1.2-.7-.5.1-.5.1-.5.8.1 1.2.8 1.2.8.7 1.3 1.9.9 2.3.7.1-.5.3-.9.5-1.1-1.8-.2-3.6-.9-3.6-4 0-.9.3-1.6.8-2.1-.1-.2-.4-1 .1-2.1 0 0 .7-.2 2.2.8.6-.2 1.3-.3 2-.3s1.4.1 2 .3c1.5-1 2.2-.8 2.2-.8.4 1.1.2 1.9.1 2.1.5.6.8 1.3.8 2.1 0 3.1-1.9 3.7-3.7 3.9.3.4.6.9.6 1.6v2.2c0 .2.1.5.6.4 3.2-1.1 5.5-4.1 5.5-7.6-.1-4.4-3.7-8-8.1-8z" fill="#FFF" />
+                                        </svg>
+                                        <div class="text-gray-800 dark:text-gray-100">Github.com</div>
+                                    </div>
+                                </td>
+                                <td class="p-2">
+                                    <div class="text-center">2.4K</div>
+                                </td>
+                                <td class="p-2">
+                                    <div class="text-center text-green-500">$3,877</div>
+                                </td>
+                                <td class="p-2">
+                                    <div class="text-center">267</div>
+                                </td>
+                                <td class="p-2">
+                                    <div class="text-center text-sky-500">4.7%</div>
+                                </td>
+                            </tr>
+                            <!-- Row -->
+                            <tr>
+                                <td class="p-2">
+                                    <div class="flex items-center">
+                                        <svg class="shrink-0 mr-2 sm:mr-3" width="36" height="36" viewBox="0 0 36 36">
+                                            <circle fill="#1877F2" cx="18" cy="18" r="18" />
+                                            <path d="M16.023 26 16 19h-3v-3h3v-2c0-2.7 1.672-4 4.08-4 1.153 0 2.144.086 2.433.124v2.821h-1.67c-1.31 0-1.563.623-1.563 1.536V16H23l-1 3h-2.72v7h-3.257Z" fill="#FFF" fill-rule="nonzero" />
+                                        </svg>
+                                        <div class="text-gray-800 dark:text-gray-100">Facebook</div>
+                                    </div>
+                                </td>
+                                <td class="p-2">
+                                    <div class="text-center">2.2K</div>
+                                </td>
+                                <td class="p-2">
+                                    <div class="text-center text-green-500">$3,426</div>
+                                </td>
+                                <td class="p-2">
+                                    <div class="text-center">249</div>
+                                </td>
+                                <td class="p-2">
+                                    <div class="text-center text-sky-500">4.4%</div>
+                                </td>
+                            </tr>
+                            <!-- Row -->
+                            <tr>
+                                <td class="p-2">
+                                    <div class="flex items-center">
+                                        <svg class="shrink-0 mr-2 sm:mr-3" width="36" height="36" viewBox="0 0 36 36">
+                                            <circle fill="#EA4335" cx="18" cy="18" r="18" />
+                                            <path d="M18 17v2.4h4.1c-.2 1-1.2 3-4 3-2.4 0-4.3-2-4.3-4.4 0-2.4 2-4.4 4.3-4.4 1.4 0 2.3.6 2.8 1.1l1.9-1.8C21.6 11.7 20 11 18.1 11c-3.9 0-7 3.1-7 7s3.1 7 7 7c4 0 6.7-2.8 6.7-6.8 0-.5 0-.8-.1-1.2H18z" fill="#FFF" fill-rule="nonzero" />
+                                        </svg>
+                                        <div class="text-gray-800 dark:text-gray-100">Google (organic)</div>
+                                    </div>
+                                </td>
+                                <td class="p-2">
+                                    <div class="text-center">2.0K</div>
+                                </td>
+                                <td class="p-2">
+                                    <div class="text-center text-green-500">$2,444</div>
+                                </td>
+                                <td class="p-2">
+                                    <div class="text-center">224</div>
+                                </td>
+                                <td class="p-2">
+                                    <div class="text-center text-sky-500">4.2%</div>
+                                </td>
+                            </tr>
+                            <!-- Row -->
+                            <tr>
+                                <td class="p-2">
+                                    <div class="flex items-center">
+                                        <svg class="shrink-0 mr-2 sm:mr-3" width="36" height="36" viewBox="0 0 36 36">
+                                            <circle fill="#4BC9FF" cx="18" cy="18" r="18" />
+                                            <path d="M26 14.3c-.1 1.6-1.2 3.7-3.3 6.4-2.2 2.8-4 4.2-5.5 4.2-.9 0-1.7-.9-2.4-2.6C14 19.9 13.4 15 12 15c-.1 0-.5.3-1.2.8l-.8-1c.8-.7 3.5-3.4 4.7-3.5 1.2-.1 2 .7 2.3 2.5.3 2 .8 6.1 1.8 6.1.9 0 2.5-3.4 2.6-4 .1-.9-.3-1.9-2.3-1.1.8-2.6 2.3-3.8 4.5-3.8 1.7.1 2.5 1.2 2.4 3.3z" fill="#FFF" fill-rule="nonzero" />
+                                        </svg>
+                                        <div class="text-gray-800 dark:text-gray-100">Vimeo.com</div>
+                                    </div>
+                                </td>
+                                <td class="p-2">
+                                    <div class="text-center">1.9K</div>
+                                </td>
+                                <td class="p-2">
+                                    <div class="text-center text-green-500">$2,236</div>
+                                </td>
+                                <td class="p-2">
+                                    <div class="text-center">220</div>
+                                </td>
+                                <td class="p-2">
+                                    <div class="text-center text-sky-500">4.2%</div>
+                                </td>
+                            </tr>
+                            <!-- Row -->
+                            <tr>
+                                <td class="p-2">
+                                    <div class="flex items-center">
+                                        <svg class="shrink-0 mr-2 sm:mr-3" width="36" height="36" viewBox="0 0 36 36">
+                                            <circle fill="#0E2439" cx="18" cy="18" r="18" />
+                                            <path d="M14.232 12.818V23H11.77V12.818h2.46zM15.772 23V12.818h2.462v4.087h4.012v-4.087h2.456V23h-2.456v-4.092h-4.012V23h-2.461z" fill="#E6ECF4" />
+                                        </svg>
+                                        <div class="text-gray-800 dark:text-gray-100">Indiehackers.com</div>
+                                    </div>
+                                </td>
+                                <td class="p-2">
+                                    <div class="text-center">1.7K</div>
+                                </td>
+                                <td class="p-2">
+                                    <div class="text-center text-green-500">$2,034</div>
+                                </td>
+                                <td class="p-2">
+                                    <div class="text-center">204</div>
+                                </td>
+                                <td class="p-2">
+                                    <div class="text-center text-sky-500">3.9%</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+        
+        <!-- Line chart (Sales Over Time) -->
+        <div class="flex flex-col col-span-full sm:col-span-6 bg-white dark:bg-gray-800 shadow-xs rounded-xl">
+            <header class="px-5 py-4 border-b border-gray-100 dark:border-gray-700/60 flex items-center">
+                <h2 class="font-semibold text-gray-800 dark:text-gray-100">Sales Over Time (all stores)</h2>
+            </header>
+            <div class="px-5 py-3">
+                <div class="flex flex-wrap justify-between items-end gap-y-2 gap-x-4">
+                    <div class="flex items-start">
+                        <div class="text-3xl font-bold text-gray-800 dark:text-gray-100 mr-2">$1,482</div>
+                        <div class="text-sm font-medium text-red-700 px-1.5 bg-red-500/20 rounded-full">-22%</div>
+                    </div>
+                    <div id="dashboard-card-08-legend" class="grow mb-1">
+                        <ul class="flex flex-wrap gap-x-4 sm:justify-end"></ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Chart built with Chart.js 3 -->
+            <!-- Check out src/js/dashboard-charts.js for config -->
+            <div class="grow">
+                <!-- Change the height attribute to adjust the chart height -->
+                <canvas id="dashboard-card-08" width="595" height="248"></canvas>
+            </div>
+        </div>
+
+        <!-- Stacked bar chart (Sales VS Refunds) -->
+        <div class="flex flex-col col-span-full sm:col-span-6 bg-white dark:bg-gray-800 shadow-xs rounded-xl">
+            <header class="px-5 py-4 border-b border-gray-100 dark:border-gray-700/60 flex items-center">
+                <h2 class="font-semibold text-gray-800 dark:text-gray-100">Sales VS Refunds</h2>
+                <div class="relative ml-2" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
+                    <button class="block" href="#0" aria-haspopup="true" :aria-expanded="open" @focus="open = true" @focusout="open = false" @click.prevent>
+                        <svg class="fill-current text-gray-400 dark:text-gray-500" width="16" height="16" viewBox="0 0 16 16">
+                            <path d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm0 12c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1zm1-3H7V4h2v5z" />
+                        </svg>
+                    </button>
+                    <div class="z-10 absolute bottom-full left-1/2 -translate-x-1/2">
+                        <div class="min-w-72 bg-white dark:bg-gray-800 dark:text-gray-100 border border-gray-200 dark:border-gray-600 px-3 py-2 rounded-lg shadow-lg overflow-hidden mb-2" x-show="open" x-transition:enter="transition ease-out duration-200 transform" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-out duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" x-cloak>
+                            <div class="text-sm">Sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit.</div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <div class="px-5 py-3">
+                <div class="flex items-start">
+                    <div class="text-3xl font-bold text-gray-800 dark:text-gray-100 mr-2">+$6,796</div>
+                    <div class="text-sm font-medium text-red-700 px-1.5 bg-red-500/20 rounded-full">-34%</div>
+                </div>
+            </div>
+            <!-- Chart built with Chart.js 3 -->
+            <!-- Check out src/js/dashboard-charts.js for config -->
+            <div class="grow">
+                <!-- Change the height attribute to adjust the chart height -->
+                <canvas id="dashboard-card-09" width="595" height="248"></canvas>
+            </div>
+        </div>
+
+        <!-- Card (Recent Activity) -->
+        <div class="col-span-full xl:col-span-6 bg-white dark:bg-gray-800 shadow-xs rounded-xl">
+            <header class="px-5 py-4 border-b border-gray-100 dark:border-gray-700/60">
+                <h2 class="font-semibold text-gray-800 dark:text-gray-100">Recent Activity</h2>
+            </header>
+            <div class="p-3">
+
+                <!-- Card content -->
+                <!-- "Today" group -->
+                <div>
+                    <header class="text-xs uppercase text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-700/50 rounded-xs font-semibold p-2">Today</header>
+                    <ul class="my-1">
+                        <!-- Item -->
+                        <li class="flex px-2">
+                            <div class="w-9 h-9 rounded-full shrink-0 bg-violet-500 my-2 mr-3">
+                                <svg class="w-9 h-9 fill-current text-white" viewBox="0 0 36 36">
+                                    <path d="M18 10c-4.4 0-8 3.1-8 7s3.6 7 8 7h.6l5.4 2v-4.4c1.2-1.2 2-2.8 2-4.6 0-3.9-3.6-7-8-7zm4 10.8v2.3L18.9 22H18c-3.3 0-6-2.2-6-5s2.7-5 6-5 6 2.2 6 5c0 2.2-2 3.8-2 3.8z" />
+                                </svg>
+                            </div>
+                            <div class="grow flex items-center border-b border-gray-100 dark:border-gray-700/60 text-sm py-2">
+                                <div class="grow flex justify-between">
+                                    <div class="self-center"><a class="font-medium text-gray-800 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white" href="#0">Nick Mark</a> mentioned <a class="font-medium text-gray-800 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white" href="#0">Sara Smith</a> in a new post</div>
+                                    <div class="shrink-0 self-end ml-2">
+                                        <a class="font-medium text-violet-500 hover:text-violet-600 dark:hover:text-violet-400" href="#0">View<span class="hidden sm:inline"> -&gt;</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- Item -->
+                        <li class="flex px-2">
+                            <div class="w-9 h-9 rounded-full shrink-0 bg-red-500 my-2 mr-3">
+                                <svg class="w-9 h-9 fill-current text-white" viewBox="0 0 36 36">
+                                    <path d="M25 24H11a1 1 0 01-1-1v-5h2v4h12v-4h2v5a1 1 0 01-1 1zM14 13h8v2h-8z" />
+                                </svg>
+                            </div>
+                            <div class="grow flex items-center border-b border-gray-100 dark:border-gray-700/60 text-sm py-2">
+                                <div class="grow flex justify-between">
+                                    <div class="self-center">The post <a class="font-medium text-gray-800 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white" href="#0">Post Name</a> was removed by <a class="font-medium text-gray-800 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white" href="#0">Nick Mark</a></div>
+                                    <div class="shrink-0 self-end ml-2">
+                                        <a class="font-medium text-violet-500 hover:text-violet-600 dark:hover:text-violet-400" href="#0">View<span class="hidden sm:inline"> -&gt;</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- Item -->
+                        <li class="flex px-2">
+                            <div class="w-9 h-9 rounded-full shrink-0 bg-green-500 my-2 mr-3">
+                                <svg class="w-9 h-9 fill-current text-white" viewBox="0 0 36 36">
+                                    <path d="M15 13v-3l-5 4 5 4v-3h8a1 1 0 000-2h-8zM21 21h-8a1 1 0 000 2h8v3l5-4-5-4v3z" />
+                                </svg>
+                            </div>
+                            <div class="grow flex items-center text-sm py-2">
+                                <div class="grow flex justify-between">
+                                    <div class="self-center"><a class="font-medium text-gray-800 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white" href="#0">Patrick Sullivan</a> published a new <a class="font-medium text-gray-800 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white" href="#0">post</a></div>
+                                    <div class="shrink-0 self-end ml-2">
+                                        <a class="font-medium text-violet-500 hover:text-violet-600 dark:hover:text-violet-400" href="#0">View<span class="hidden sm:inline"> -&gt;</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- "Yesterday" group -->
+                <div>
+                    <header class="text-xs uppercase text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-700/50 rounded-xs font-semibold p-2">Yesterday</header>
+                    <ul class="my-1">
+                        <!-- Item -->
+                        <li class="flex px-2">
+                            <div class="w-9 h-9 rounded-full shrink-0 bg-sky-500 my-2 mr-3">
+                                <svg class="w-9 h-9 fill-current text-white" viewBox="0 0 36 36">
+                                    <path d="M23 11v2.085c-2.841.401-4.41 2.462-5.8 4.315-1.449 1.932-2.7 3.6-5.2 3.6h-1v2h1c3.5 0 5.253-2.338 6.8-4.4 1.449-1.932 2.7-3.6 5.2-3.6h3l-4-4zM15.406 16.455c.066-.087.125-.162.194-.254.314-.419.656-.872 1.033-1.33C15.475 13.802 14.038 13 12 13h-1v2h1c1.471 0 2.505.586 3.406 1.455zM24 21c-1.471 0-2.505-.586-3.406-1.455-.066.087-.125.162-.194.254-.316.422-.656.873-1.028 1.328.959.878 2.108 1.573 3.628 1.788V25l4-4h-3z" />
+                                </svg>
+                            </div>
+                            <div class="grow flex items-center border-b border-gray-100 dark:border-gray-700/60 text-sm py-2">
+                                <div class="grow flex justify-between">
+                                    <div class="self-center"><a class="font-medium text-gray-800 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white" href="#0">240+</a> users have subscribed to <a class="font-medium text-gray-800 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white" href="#0">Newsletter #1</a></div>
+                                    <div class="shrink-0 self-end ml-2">
+                                        <a class="font-medium text-violet-500 hover:text-violet-600 dark:hover:text-violet-400" href="#0">View<span class="hidden sm:inline"> -&gt;</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- Item -->
+                        <li class="flex px-2">
+                            <div class="w-9 h-9 rounded-full shrink-0 bg-violet-500 my-2 mr-3">
+                                <svg class="w-9 h-9 fill-current text-white" viewBox="0 0 36 36">
+                                    <path d="M18 10c-4.4 0-8 3.1-8 7s3.6 7 8 7h.6l5.4 2v-4.4c1.2-1.2 2-2.8 2-4.6 0-3.9-3.6-7-8-7zm4 10.8v2.3L18.9 22H18c-3.3 0-6-2.2-6-5s2.7-5 6-5 6 2.2 6 5c0 2.2-2 3.8-2 3.8z" />
+                                </svg>
+                            </div>
+                            <div class="grow flex items-center text-sm py-2">
+                                <div class="grow flex justify-between">
+                                    <div class="self-center">The post <a class="font-medium text-gray-800 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white" href="#0">Post Name</a> was suspended by <a class="font-medium text-gray-800 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white" href="#0">Nick Mark</a></div>
+                                    <div class="shrink-0 self-end ml-2">
+                                        <a class="font-medium text-violet-500 hover:text-violet-600 dark:hover:text-violet-400" href="#0">View<span class="hidden sm:inline"> -&gt;</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Card (Income/Expenses) -->
+        <div class="col-span-full xl:col-span-6 bg-white dark:bg-gray-800 shadow-xs rounded-xl">
+            <header class="px-5 py-4 border-b border-gray-100 dark:border-gray-700/60">
+                <h2 class="font-semibold text-gray-800 dark:text-gray-100">Income/Expenses</h2>
+            </header>
+            <div class="p-3">
+
+                <!-- Card content -->
+                <!-- "Today" group -->
+                <div>
+                    <header class="text-xs uppercase text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-700/50 rounded-xs font-semibold p-2">Today</header>
+                    <ul class="my-1">
+                        <!-- Item -->
+                        <li class="flex px-2">
+                            <div class="w-9 h-9 rounded-full shrink-0 bg-red-500 my-2 mr-3">
+                                <svg class="w-9 h-9 fill-current text-white" viewBox="0 0 36 36">
+                                    <path d="M17.7 24.7l1.4-1.4-4.3-4.3H25v-2H14.8l4.3-4.3-1.4-1.4L11 18z" />
+                                </svg>
+                            </div>
+                            <div class="grow flex items-center border-b border-gray-100 dark:border-gray-700/60 text-sm py-2">
+                                <div class="grow flex justify-between">
+                                    <div class="self-center"><a class="font-medium text-gray-800 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white" href="#0">Qonto</a> billing</div>
+                                    <div class="shrink-0 self-start ml-2">
+                                        <span class="font-medium text-gray-800 dark:text-gray-100">-$49.88</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- Item -->
+                        <li class="flex px-2">
+                            <div class="w-9 h-9 rounded-full shrink-0 bg-green-500 my-2 mr-3">
+                                <svg class="w-9 h-9 fill-current text-white" viewBox="0 0 36 36">
+                                    <path d="M18.3 11.3l-1.4 1.4 4.3 4.3H11v2h10.2l-4.3 4.3 1.4 1.4L25 18z" />
+                                </svg>
+                            </div>
+                            <div class="grow flex items-center border-b border-gray-100 dark:border-gray-700/60 text-sm py-2">
+                                <div class="grow flex justify-between">
+                                    <div class="self-center"><a class="font-medium text-gray-800 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white" href="#0">Cruip.com</a> Market Ltd 70 Wilson St London</div>
+                                    <div class="shrink-0 self-start ml-2">
+                                        <span class="font-medium text-green-600">+249.88</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- Item -->
+                        <li class="flex px-2">
+                            <div class="w-9 h-9 rounded-full shrink-0 bg-green-500 my-2 mr-3">
+                                <svg class="w-9 h-9 fill-current text-white" viewBox="0 0 36 36">
+                                    <path d="M18.3 11.3l-1.4 1.4 4.3 4.3H11v2h10.2l-4.3 4.3 1.4 1.4L25 18z" />
+                                </svg>
+                            </div>
+                            <div class="grow flex items-center border-b border-gray-100 dark:border-gray-700/60 text-sm py-2">
+                                <div class="grow flex justify-between">
+                                    <div class="self-center"><a class="font-medium text-gray-800 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white" href="#0">Notion Labs Inc</a></div>
+                                    <div class="shrink-0 self-start ml-2">
+                                        <span class="font-medium text-green-600">+99.99</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- Item -->
+                        <li class="flex px-2">
+                            <div class="w-9 h-9 rounded-full shrink-0 bg-green-500 my-2 mr-3">
+                                <svg class="w-9 h-9 fill-current text-white" viewBox="0 0 36 36">
+                                    <path d="M18.3 11.3l-1.4 1.4 4.3 4.3H11v2h10.2l-4.3 4.3 1.4 1.4L25 18z" />
+                                </svg>
+                            </div>
+                            <div class="grow flex items-center border-b border-gray-100 dark:border-gray-700/60 text-sm py-2">
+                                <div class="grow flex justify-between">
+                                    <div class="self-center"><a class="font-medium text-gray-800 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white" href="#0">Market Cap Ltd</a></div>
+                                    <div class="shrink-0 self-start ml-2">
+                                        <span class="font-medium text-green-600">+1,200.88</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- Item -->
+                        <li class="flex px-2">
+                            <div class="w-9 h-9 rounded-full shrink-0 bg-gray-200 my-2 mr-3">
+                                <svg class="w-9 h-9 fill-current text-gray-400" viewBox="0 0 36 36">
+                                    <path d="M21.477 22.89l-8.368-8.367a6 6 0 008.367 8.367zm1.414-1.413a6 6 0 00-8.367-8.367l8.367 8.367zM18 26a8 8 0 110-16 8 8 0 010 16z" />
+                                </svg>
+                            </div>
+                            <div class="grow flex items-center border-b border-gray-100 dark:border-gray-700/60 text-sm py-2">
+                                <div class="grow flex justify-between">
+                                    <div class="self-center"><a class="font-medium text-gray-800 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white" href="#0">App.com</a> Market Ltd 70 Wilson St London</div>
+                                    <div class="shrink-0 self-start ml-2">
+                                        <span class="font-medium text-gray-800 dark:text-gray-100 line-through">+$99.99</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- Item -->
+                        <li class="flex px-2">
+                            <div class="w-9 h-9 rounded-full shrink-0 bg-red-500 my-2 mr-3">
+                                <svg class="w-9 h-9 fill-current text-white" viewBox="0 0 36 36">
+                                    <path d="M17.7 24.7l1.4-1.4-4.3-4.3H25v-2H14.8l4.3-4.3-1.4-1.4L11 18z" />
+                                </svg>
+                            </div>
+                            <div class="grow flex items-center text-sm py-2">
+                                <div class="grow flex justify-between">
+                                    <div class="self-center"><a class="font-medium text-gray-800 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white" href="#0">App.com</a> Market Ltd 70 Wilson St London</div>
+                                    <div class="shrink-0 self-start ml-2">
+                                        <span class="font-medium text-gray-800 dark:text-gray-100">-$49.88</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
