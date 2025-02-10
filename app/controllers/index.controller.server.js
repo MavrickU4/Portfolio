@@ -1,7 +1,7 @@
 
 import { UserID, UserDisplayName, mobileCheck, transporter, sendEmail, companyEmail, personalEmail} from "../utils/index.js";
 import { sendEmailIn } from "../utils/emailService.js";
-import Projects from "../models/projects.js";
+import MyProjects from "../models/projects.js";
 
 export function displayHomePage(req, res, next) {
     res.render('index', { title: 'Home', page: 'home', 
@@ -18,8 +18,9 @@ export function displayAboutPage(req, res, next) {
         mobile: mobileCheck(req), successMessage: req.flash('successMessage'), errorMessage: req.flash('errorMessage')} );
 };
 
-export function displayProjectsPage(req, res, next) {
-    res.render('index', { title: 'Projects', page: 'projects', projects: Projects.find(), 
+export async function displayProjectsPage(req, res, next) {
+     const myProjects = await MyProjects.find(); 
+    res.render('index', { title: 'Projects', page: 'projects', myProjects: myProjects, 
         admin: false,
         displayName: UserDisplayName(req), userID: UserID(req),
         mobile: mobileCheck(req), successMessage: req.flash('successMessage'), errorMessage: req.flash('errorMessage') } );

@@ -4,7 +4,7 @@ import {Router} from 'express';
 import { AdminAuthGuard } from "../utils/index.js";
 import { displayAdminDashboardPage, displayAdminDatabaseMyProjectsPage,
 
-    processAddMyProject
+    processActionMyProject,
     
  } from '../controllers/admin.controller.server.js';
 
@@ -14,6 +14,6 @@ const router = Router();
 router.get('/admin/dashboard', AdminAuthGuard, displayAdminDashboardPage);
 router.get('/admin/database/my-projects', AdminAuthGuard, displayAdminDatabaseMyProjectsPage);
 
-router.post('/admin/my-projects/add', AdminAuthGuard, processAddMyProject);
+router.post('/admin/my-projects/action', AdminAuthGuard, processActionMyProject);
 
 export default router;

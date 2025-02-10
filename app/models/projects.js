@@ -8,7 +8,8 @@ const projectSchema = new Schema({
     skills: String,
     priority: String,
     url: String,
-    imgUrl: String
+    imgUrl: String,
+    status: String
 }, {
     timestamps: true,
     collection: 'projects'

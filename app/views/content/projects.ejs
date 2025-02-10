@@ -46,8 +46,9 @@
 	  <h2 class="sr-only">Products</h2>
   
 	  <div class="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:grid-cols-3 lg:gap-x-8">
-		<% if (projects && projects.legth > 0) { %>
-			<% projects.forEach(function(project) { %> 
+		<% if (myProjects && myProjects.length > 0) { %>
+			<% myProjects.forEach(function(project) { %>
+				<% console.log(project); %> 
 			<div class="group relative flex flex-col overflow-hidden rounded-lg rounded-lg border border-gray-200 bg-white">
 				<div class="aspect-h-3 aspect-w-2 bg-gray-200 sm:aspect-none group-hover:opacity-75">
 				  <img src="<%- project.imgUrl %>" alt="Eight shirts arranged on table in black, olive, grey, blue, white, red, mustard, and green." class="h-full w-full object-cover object-center sm:h-full sm:w-full">
@@ -68,98 +69,7 @@
 			  </div>
 		<% }); %>
 	<% } %>
-		<div class="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white">
-			<div class="aspect-h-3 aspect-w-2 bg-gray-200 sm:aspect-none group-hover:opacity-75">
-			  <img src="../../../public/content/images/projects/atlask9.png" alt="Eight shirts arranged on table in black, olive, grey, blue, white, red, mustard, and green." class="h-full w-full object-cover object-center sm:h-full sm:w-full">
-			</div>
-			<div class="flex flex-1 flex-col space-y-2 p-4">
-			  <h3 class="<% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> font-medium text-gray-900">
-				<a href="#">
-				  <span aria-hidden="true" class="absolute inset-0"></span>
-				 Atlas K9
-				</a>
-			  </h3>
-			  <p class="<% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> text-gray-500">A K9 bed bug detection & elimination website.</p>
-			  <div class="flex flex-1 flex-col justify-end">
-				<p class="<% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> italic text-gray-500">Node.js, Mongo.db, express.js, Tailwind, CSS, HTML, Render</p>
-				<p class="<% if (mobile) { %> text-3xl <% } else { %> text-base <% } %> font-medium text-gray-900">https://www.atlask9.ca</p>
-			  </div>
-			</div>
-		  </div>
-			<div class="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white">
-				<div class="aspect-h-4 aspect-w-3 bg-gray-200 sm:aspect-none group-hover:opacity-75 sm:h-72">
-				  <img src="../../../public/content/images/projects/helpinghand.png" alt="Eight shirts arranged on table in black, olive, grey, blue, white, red, mustard, and green." class="h-full w-full object-cover object-center sm:h-full sm:w-full">
-				</div>
-				<div class="flex flex-1 flex-col space-y-2 p-4">
-				  <h3 class="<% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> font-medium text-gray-900">
-					<a href="#">
-					  <span aria-hidden="true" class="absolute inset-0"></span>
-					  Bug Smasher
-					</a>
-				  </h3>
-				  <p class="<% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> text-gray-500">Personal creation of a web-app to help volunteers connect with those that need help.</p>
-				  <div class="flex flex-1 flex-col justify-end">
-					<p class="<% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> italic text-gray-500">Node.js, Mongo.db, express.js, Tailwind, CSS, HTML, Render</p>
-					<p class="<% if (mobile) { %> text-3xl <% } else { %> text-base <% } %> font-medium text-gray-900">https://www.helpinghandfoundation.ca/</p>
-				  </div>
-				</div>
-			  </div>
-		<div class="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white">
-		  <div class="aspect-h-4 aspect-w-3 bg-gray-200 sm:aspect-none group-hover:opacity-75 sm:h-72">
-			<img src="../../../public/content/images/Project3.png" alt="Front of plain black t-shirt." class="h-full w-full object-cover object-center sm:h-full sm:w-full">
-		  </div>
-		  <div class="flex flex-1 flex-col space-y-2 p-4">
-			<h3 class="<% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> font-medium text-gray-900">
-			  <a href="#">
-				<span aria-hidden="true" class="absolute inset-0"></span>
-				Helping Hand
-			  </a>
-			</h3>
-			<p class="<% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> text-gray-500">This project is still under development. I wanted to build it after I felt a need to help others, however I wasn't seeing anyone around me that really needed help. I figured that volunteers and those that need help would like a place to connect. This app is built with OutSystems, CSS and an SQL database.</p>
-			<div class="flex flex-1 flex-col justify-end">
-			  <p class="<% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> italic text-gray-500">Node.js, Mongo.db, express.js, CSS, HTML</p>
-			  <p class="<% if (mobile) { %> text-3xl <% } else { %> text-base <% } %> font-medium text-gray-900">https://www.helpinghandfoundation.ca</p>
-			</div>
-		  </div>
-		</div>
-		<div class="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white">
-			<div class="aspect-h-4 aspect-w-3 bg-gray-200 sm:aspect-none group-hover:opacity-75 sm:h-72">
-			  <img src="../../../public/content/images/Project1.png" alt="Eight shirts arranged on table in black, olive, grey, blue, white, red, mustard, and green." class="h-full w-full object-cover object-center sm:h-full sm:w-full">
-			</div>
-			<div class="flex flex-1 flex-col space-y-2 p-4">
-			  <h3 class="<% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> font-medium text-gray-900">
-				<a href="#">
-				  <span aria-hidden="true" class="absolute inset-0"></span>
-				  Bug Smasher
-				</a>
-			  </h3>
-			  <p class="<% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> text-gray-500">With supporting text below as a natural lead-in to additional content.</p>
-			  <div class="flex flex-1 flex-col justify-end">
-				<p class="<% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> italic text-gray-500">C#</p>
-				<p class="<% if (mobile) { %> text-3xl <% } else { %> text-base <% } %> font-medium text-gray-900">--</p>
-			  </div>
-			</div>
-		  </div>
-		<div class="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white">
-			<div class="aspect-h-4 aspect-w-3 bg-gray-200 sm:aspect-none group-hover:opacity-75 sm:h-72">
-			  <img src="../../../public/content/images/Project2.png" alt="Front of plain black t-shirt." class="h-full w-full object-cover object-center sm:h-full sm:w-full">
-			</div>
-			<div class="flex flex-1 flex-col space-y-2 p-4">
-			  <h3 class="<% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> font-medium text-gray-900">
-				<a href="#">
-				  <span aria-hidden="true" class="absolute inset-0"></span>
-				  School Calculator
-				</a>
-			  </h3>
-			  <p class="<% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> text-gray-500">This project was built in 2022 with C# Design. It is a fully functional calculator.</p>
-			  <div class="flex flex-1 flex-col justify-end">
-				<p class="<% if (mobile) { %> text-3xl <% } else { %> text-sm <% } %> italic text-gray-500">C# Design</p>
-				<p class="<% if (mobile) { %> text-3xl <% } else { %> text-base <% } %> font-medium text-gray-900">Visual Studio Code</p>
-			  </div>
-			</div>
-		  </div>
   
-		<!-- More products... -->
 	  </div>
 	</div>
   </div>
