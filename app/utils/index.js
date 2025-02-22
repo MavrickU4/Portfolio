@@ -84,12 +84,8 @@ export function GenerateToken(user){
 }
 
 export function mobileCheck(req, res, next) {
-    const userAgent = req.headers['user-agent'];
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent)) {
-      return true;
-    } else {
-      return false;
-    }
+  const userAgent = req.headers['user-agent'];
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile/i.test(userAgent);
 }
 
 export async function sendEmail(subject, body, toEmail, fromEmail) {
