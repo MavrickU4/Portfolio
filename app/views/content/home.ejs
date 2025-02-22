@@ -61,7 +61,7 @@
 
     <!-- Testimonial section -->
     <div class="relative z-10 mt-32 bg-gray-900 pb-20 sm:mt-56 sm:pb-24 xl:pb-0">
-      <div class="absolute bg-white inset-0 overflow-hidden" aria-hidden="true">
+      <div class="absolute bg-white inset-0 overflow-hidden <% if (mobile) { %> h-[1000px] <% } else { %> h-[1000px] lg:h-[900px] xl:h-[0px] <% } %>" aria-hidden="true">
       
       </div>
       <div class="mx-auto flex lg:max-w-7xl flex-col items-center gap-x-8 gap-y-10 px-6 sm:gap-y-8 lg:px-8 xl:flex-row <% if (mobile) { %> max-h-[250px] h-[50%] <% } else { %> h-[40%] md:h-[50%] xl:h-full <% } %>">
@@ -95,7 +95,7 @@
     </div>
 
     <!-- Feature section -->
-    <div class="mx-auto mt-16 max-w-7xl px-6 sm:mt-36 lg:px-8">
+    <div class="relative mx-auto  max-w-7xl px-6  lg:px-8 <% if (mobile) { %> mt-[800px] <% } else { %> mt-[600px] lg:mt-[400px] xl:mt-[200px] <% } %>">
       <div class="mx-auto max-w-2xl text-center">
         <h2 class="<% if (mobile) { %> text-2xl <% } else { %> text-base <% } %> font-semibold leading-7 text-indigo-400">My Skills</h2>
         <p class="mt-2 <% if (mobile) { %> text-5xl <% } else { %> text-3xl <% } %> font-bold tracking-tight text-white sm:text-4xl">Crafting Digital Innovation & Quality</p>
