@@ -217,10 +217,12 @@
             </div>
 
             <!-- Buttons -->
-            <div class="mt-4 flex justify-end space-x-2 z-50">
-                <label  id="delete-project-button" class="hover:cursor-pointer px-4 py-2 bg-red-500 dark:bg-red-700 text-white dark:text-gray-100 rounded-md hover:bg-gray-400 hidden">Delete</label>
-                <button type="button" id="closeModalBtn" class="hover:cursor-pointer px-4 py-2 bg-gray-300 dark:bg-gray-700 text-gray-50 dark:text-gray-200 rounded-md hover:bg-gray-400">Cancel</button>
-                <button type="submit" class="hover:cursor-pointer px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Save</button>
+            <div class="mt-4 flex justify-end space-x-2">
+                <button id="delete-project-button" type="button" class="hover:cursor-pointer px-4 py-2 bg-red-500 dark:bg-red-700 text-white dark:text-gray-100 rounded-md hover:bg-gray-400 hidden">Delete</button>
+                <button type="button" id="closeModalBtn" class="hover:cursor-pointer px-4 py-2 bg-red-500 dark:bg-gray-700 border border-red-600 rounded-lg text-white dark:text-gray-200 rounded-md hover:bg-red-400">Cancel</button>
+                <button type="submit" class="hover:cursor-pointer px-4 py-2 bg-blue-600 dark:bg-blue-700 border border-blue-500 rounded-lg text-white dark:text-white hover:bg-blue-700 dark:hover:bg-blue-800">
+                    Save
+                </button>            
             </div>
         </form>
     </div>
@@ -272,12 +274,12 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Close modal when clicking outside the modal content
-    modalOverlay.addEventListener('click', (event) => {
-        if (event.target === modalOverlay) {
-            modalOverlay.classList.add('hidden');
-            projectDeleteButton.classList.add('hidden');
-        }
-    });
+    // modalOverlay.addEventListener('click', (event) => {
+    //     if (event.target === modalOverlay) {
+    //         modalOverlay.classList.add('hidden');
+    //         projectDeleteButton.classList.add('hidden');
+    //     }
+    // });
 
     // Handle form submission with AJAX
     projectForm.addEventListener('submit', async (event) => {
