@@ -188,45 +188,44 @@
 
 
 <!-- Modal Overlay (Hidden by Default) -->
-<div id="modalOverlay" class="fixed z-40 inset-0 bg-black bg-opacity-50 backdrop-blur-sm hidden flex justify-center items-center z-40">
+<div id="modalOverlay" class="fixed z-40 inset-0 bg-black bg-opacity-50 backdrop-blur-sm hidden flex justify-center items-center">
 
     <!-- Modal Window -->
-    <div class="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-lg max-w-2xl w-full border-2 border-white z-50">
-        <h2 id="action-header" class="text-xl font-semibold mb-4 text-white dark:text-gray-200">Add a New Project</h2>
+    <div class="bg-white p-6 rounded-lg shadow-lg max-w-2xl w-full border-2 border-white">
+        <h2 id="action-header" class="text-xl font-semibold mb-4 text-gray-800">Add a New Project</h2>
 
         <!-- Form -->
         <form id="projectForm">
             <div class="space-y-3">
                 <input type="hidden" id="id" name="id">
-                <input type="text" id="title" name="title" placeholder="Project Title" class="w-full p-2 border rounded-md dark:bg-gray-800 dark:text-white">
-                <textarea id="description" name="description" placeholder="Project Description" class="w-full p-2 border rounded-md dark:bg-gray-800 dark:text-white"></textarea>
-                <input type="text" id="status" name="status" placeholder="Status" class="w-full p-2 border rounded-md dark:bg-gray-800 dark:text-white">
-                <input type="text" id="skills" name="skills" placeholder="Skills (comma separated)" class="w-full p-2 border rounded-md dark:bg-gray-800 dark:text-white">
-                <input type="text" id="features" name="features" placeholder="Features (comma separated)" class="w-full p-2 border rounded-md dark:bg-gray-800 dark:text-white">
+                <input type="text" id="title" name="title" required placeholder="Project Title" class="w-full p-2 border rounded-md bg-gray-100 text-gray-800">
+                <textarea id="description" name="description" placeholder="Project Description" class="w-full p-2 border rounded-md bg-gray-100 text-gray-800"></textarea>
+                <input type="text" id="status" name="status" placeholder="Status" class="w-full p-2 border rounded-md bg-gray-100 text-gray-800">
+                <input type="text" id="skills" name="skills" placeholder="Skills (comma separated)" class="w-full p-2 border rounded-md bg-gray-100 text-gray-800">
+                <input type="text" id="features" name="features" placeholder="Features (comma separated)" class="w-full p-2 border rounded-md bg-gray-100 text-gray-800">
 
-                <select id="classType" name="classType" class="w-full p-2 border rounded-md dark:bg-gray-800 dark:text-white">
+                <select id="classType" name="classType" class="w-full p-2 border rounded-md bg-gray-100 text-gray-800">
                     <option value="Web-App">Web-App</option>
                     <option value="Website">Website</option>
                     <option value="Mobile-App">Mobile-App</option>
                     <option value="Desktop-App">Desktop-App</option>
                 </select>
                 
-                <input type="text" id="priority" name="priority" placeholder="Priority (Low, Medium, High)" class="w-full p-2 border rounded-md dark:bg-gray-800 dark:text-white">
-                <input type="url" id="url" name="url" placeholder="Project URL" class="w-full p-2 border rounded-md dark:bg-gray-800 dark:text-white">
-                <input type="url" id="imgUrl" name="imgUrl" placeholder="Image URL" class="w-full p-2 border rounded-md dark:bg-gray-800 dark:text-white">
+                <input type="text" id="priority" name="priority" placeholder="Priority (Low, Medium, High)" class="w-full p-2 border rounded-md bg-gray-100 text-gray-800">
+                <input type="url" id="url" name="url" placeholder="Project URL" class="w-full p-2 border rounded-md bg-gray-100 text-gray-800">
+                <input type="url" id="imgUrl" name="imgUrl" placeholder="Image URL" class="w-full p-2 border rounded-md bg-gray-100 text-gray-800">
             </div>
 
             <!-- Buttons -->
             <div class="mt-4 flex justify-end space-x-2">
-                <button id="delete-project-button" type="button" class="hover:cursor-pointer px-4 py-2 bg-red-500 dark:bg-red-700 text-white dark:text-gray-100 rounded-md hover:bg-gray-400 hidden">Delete</button>
-                <button type="button" id="closeModalBtn" class="hover:cursor-pointer px-4 py-2 bg-red-500 dark:bg-gray-700 border border-red-600 rounded-lg text-white dark:text-gray-200 rounded-md hover:bg-red-400">Cancel</button>
-                <button type="submit" class="hover:cursor-pointer px-4 py-2 bg-blue-600 dark:bg-blue-700 border border-blue-500 rounded-lg text-white dark:text-white hover:bg-blue-700 dark:hover:bg-blue-800">
-                    Save
-                </button>            
+                <button id="deleteProjectButton" type="button" class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-400 hover:cursor-pointer hidden">Delete</button>
+                <button type="button" id="closeModalBtn" class="px-4 py-2 bg-red-500 border border-red-600 text-white rounded-md hover:bg-red-400 hover:cursor-pointer">Cancel</button>
+                <button type="submit" class="px-4 py-2 bg-blue-600 text-white border border-blue-500 rounded-md hover:bg-blue-700 hover:cursor-pointer">Save</button>
             </div>
         </form>
     </div>
 </div>
+
 
 <!-- JavaScript -->
 <script>
@@ -235,7 +234,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const closeModalBtn = document.getElementById('closeModalBtn');
     const modalOverlay = document.getElementById('modalOverlay');
     const projectForm = document.getElementById('projectForm');
-    const projectDeleteButton = document.getElementById('delete-project-button');
+    const projectDeleteButton = document.getElementById('deleteProjectButton');
     const actionHeader = document.getElementById('action-header');
 
     // Open modal
