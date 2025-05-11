@@ -90,80 +90,61 @@ export async function displayAdminDatabaseMySkillsPage(req, res, next) {
     }
 }
 
-
-
-export function processActionMyProject(req, res, next) {
+export async function processActionMyProject(req, res, next) {
     const { id, title, description, skills, classType, priority, features, status, url, imgUrl, edit, remove } = req.body;
-if (remove) {
-    // Delete the project
-    MyProjects.findByIdAndDelete(id, (err, project) => {
-        if (err) {
-            console.error('Error deleting project:', err);
-            return res.status(500).json({ success: false, message: 'Error deleting project', error: err });
+
+    try {
+        if (remove) {
+            const project = await MyProjects.findByIdAndDelete(id);
+            console.log('Project Deleted:', project);
+            return res.status(200).json({ success: true, message: 'Project deleted successfully', project });
         }
 
-        console.log('Project Deleted:', project);
-        return res.status(200).json({ success: true, message: 'Project deleted successfully', project });
-    });
-    return;
-}
-console.log('Edit:', edit);
-if (!edit) {
-    // Create a new project instance
-    const newProject = new MyProjects({
-        title,
-        description,
-        skills,
-        status,
-        priority,
-        classType,
-        features,
-        url,
-        imgUrl
-    });
+        console.log('Edit:', edit);
 
-    // Save to the database
-    newProject.save((err, project) => {
-        if (err) {
-            console.error('Error inserting new project:', err);
-            return res.status(500).json({ success: false, message: 'Error adding project', error: err });
-        }
+        if (!edit) {
+            const newProject = new MyProjects({
+                title,
+                description,
+                skills,
+                status,
+                priority,
+                classType,
+                features,
+                url,
+                imgUrl
+            });
 
-        console.log('New Project Added:', project);
-        return res.status(201).json({ success: true, message: 'Project added successfully', project });
-    });
-} else {
-    // Find the project by ID
-    MyProjects.findById(id, (err, project) => {
-        if (err) {
-            console.error('Error finding project:', err);
-            return res.status(500).json({ success: false, message: 'Error finding project', error: err });
-        }
+            const project = await newProject.save();
+            console.log('New Project Added:', project);
+            return res.status(201).json({ success: true, message: 'Project added successfully', project });
 
-        // Update the project details
-        project.title = title;
-        project.description = description;
-        project.skills = skills;
-        project.status = status;
-        project.priority = priority;
-        project.url = url;
-        project.classType = classType;
-        project.features = features;
-        project.imgUrl = imgUrl;
-
-        // Save the updated project
-        project.save((err, updatedProject) => {
-            if (err) {
-                console.error('Error updating project:', err);
-                return res.status(500).json({ success: false, message: 'Error updating project', error: err });
+        } else {
+            const project = await MyProjects.findById(id);
+            if (!project) {
+                return res.status(404).json({ success: false, message: 'Project not found' });
             }
 
+            project.title = title;
+            project.description = description;
+            project.skills = skills;
+            project.status = status;
+            project.priority = priority;
+            project.url = url;
+            project.classType = classType;
+            project.features = features;
+            project.imgUrl = imgUrl;
+
+            const updatedProject = await project.save();
             console.log('Project Updated:', updatedProject);
             return res.status(200).json({ edit, success: true, message: 'Project updated successfully', project: updatedProject });
-        });
-    });
+        }
+    } catch (err) {
+        console.error('Project processing error:', err);
+        return res.status(500).json({ success: false, message: 'Server error', error: err });
+    }
 }
-}
+
 
 export function processActionMyService(req, res, next) {
     const { id, title, description, skills, classType, priority, features, status, url, imgUrl, edit, remove } = req.body;
